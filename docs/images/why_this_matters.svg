@@ -1,0 +1,47 @@
+<svg width="680" height="430" viewBox="0 0 680 430" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+
+  <!-- Section heading -->
+  <rect x="0" y="0" width="5" height="30" fill="#378add" rx="2"/>
+  <text x="18" y="22" font-size="20" font-weight="700" fill="#0c447c">Why This Matters</text>
+
+  <!-- Intro text -->
+  <text x="0" y="56" font-size="15" fill="#2c3e50">AI systems influence decisions that affect people's lives, from access to opportunities</text>
+  <text x="0" y="76" font-size="15" fill="#2c3e50">and services to risk assessments and resource allocation. When bias goes undetected,</text>
+  <text x="0" y="96" font-size="15" fill="#2c3e50">these systems can reinforce historical inequalities or create new forms of harm.</text>
+
+  <text x="0" y="124" font-size="15" fill="#5a6a7a">Addressing fairness is a technical, ethical, legal, and business imperative. Proactively</text>
+  <text x="0" y="144" font-size="15" fill="#5a6a7a">managing bias helps teams:</text>
+
+  <!-- Row 1 cards -->
+  <rect x="0" y="166" width="204" height="84" rx="8" fill="#e6f1fb" stroke="#85b7eb" stroke-width="0.5"/>
+  <text x="20" y="192" font-size="14" font-weight="600" fill="#0c447c">Prevent Harm</text>
+  <text x="20" y="213" font-size="13" fill="#185fa5">Protect individuals and</text>
+  <text x="20" y="232" font-size="13" fill="#185fa5">communities from bias</text>
+
+  <rect x="216" y="166" width="204" height="84" rx="8" fill="#e6f1fb" stroke="#85b7eb" stroke-width="0.5"/>
+  <text x="236" y="192" font-size="14" font-weight="600" fill="#0c447c">Build Trust</text>
+  <text x="236" y="213" font-size="13" fill="#185fa5">Earn confidence from</text>
+  <text x="236" y="232" font-size="13" fill="#185fa5">users and stakeholders</text>
+
+  <rect x="432" y="166" width="248" height="84" rx="8" fill="#e6f1fb" stroke="#85b7eb" stroke-width="0.5"/>
+  <text x="452" y="192" font-size="14" font-weight="600" fill="#0c447c">Reduce Risk</text>
+  <text x="452" y="213" font-size="13" fill="#185fa5">Lower legal, regulatory, and</text>
+  <text x="452" y="232" font-size="13" fill="#185fa5">reputational exposure</text>
+
+  <!-- Row 2 cards -->
+  <rect x="0" y="262" width="326" height="84" rx="8" fill="#e6f1fb" stroke="#85b7eb" stroke-width="0.5"/>
+  <text x="20" y="288" font-size="14" font-weight="600" fill="#0c447c">Ensure Equitable Outcomes</text>
+  <text x="20" y="309" font-size="13" fill="#185fa5">Produce fairer, more reliable results</text>
+  <text x="20" y="328" font-size="13" fill="#185fa5">across user groups</text>
+
+  <rect x="338" y="262" width="342" height="84" rx="8" fill="#e6f1fb" stroke="#85b7eb" stroke-width="0.5"/>
+  <text x="358" y="288" font-size="14" font-weight="600" fill="#0c447c">Strengthen Long-Term Credibility</text>
+  <text x="358" y="309" font-size="13" fill="#185fa5">Support responsible AI development</text>
+  <text x="358" y="328" font-size="13" fill="#185fa5">and deployment over time</text>
+
+  <!-- Commitment note -->
+  <rect x="0" y="362" width="680" height="62" rx="8" fill="#faeeda" stroke="#ba7517" stroke-width="0.5"/>
+  <text x="340" y="386" text-anchor="middle" font-size="14" font-weight="600" fill="#633806">Fairness is not a one-time fix.</text>
+  <text x="340" y="408" text-anchor="middle" font-size="13" fill="#854f0b">It is an ongoing commitment to responsible AI development and deployment.</text>
+
+</svg>
