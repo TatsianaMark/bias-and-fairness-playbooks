@@ -1,0 +1,2397 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://tatsianamark.github.io/bias-and-fairness-playbooks/case_studies/medical_health_ai_agent/">
+      
+      
+        <link rel="prev" href="../../playbooks/fairness_assessment_playbook/fairness_metrics/">
+      
+      
+        <link rel="next" href="../../playbooks/fairness_action_playbook/fairness_action_playbook_intro/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Medical Health AI Agent - Bias & Fairness Playbooks</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#applying-the-fairness-audit-playbook-to-a-medical-health-ai-agent" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Bias &amp; Fairness Playbooks" class="md-header__button md-logo" aria-label="Bias & Fairness Playbooks" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3c-1.27 0-2.4.8-2.82 2H3v2h1.95L2 14c-.47 2 1 3 3.5 3s4.06-1 3.5-3L6.05 7h3.12c.33.85.98 1.5 1.83 1.83V20H2v2h20v-2h-9V8.82c.85-.32 1.5-.97 1.82-1.82h3.13L15 14c-.47 2 1 3 3.5 3s4.06-1 3.5-3l-2.95-7H21V5h-6.17C14.4 3.8 13.27 3 12 3m0 2a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m-6.5 5.25L7 14H4zm13 0L20 14h-3z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Bias & Fairness Playbooks
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Medical Health AI Agent
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Bias &amp; Fairness Playbooks" class="md-nav__button md-logo" aria-label="Bias & Fairness Playbooks" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3c-1.27 0-2.4.8-2.82 2H3v2h1.95L2 14c-.47 2 1 3 3.5 3s4.06-1 3.5-3L6.05 7h3.12c.33.85.98 1.5 1.83 1.83V20H2v2h20v-2h-9V8.82c.85-.32 1.5-.97 1.82-1.82h3.13L15 14c-.47 2 1 3 3.5 3s4.06-1 3.5-3l-2.95-7H21V5h-6.17C14.4 3.8 13.27 3 12 3m0 2a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m-6.5 5.25L7 14H4zm13 0L20 14h-3z"/></svg>
+
+    </a>
+    Bias & Fairness Playbooks
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Assessment
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Assessment
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fairness Assessment Playbook
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fairness Assessment Playbook
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../playbooks/fairness_assessment_playbook/fairness_assessment_playbook_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview and Guidance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../playbooks/fairness_assessment_playbook/context_and_history_analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Context & History Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../playbooks/fairness_assessment_playbook/fairness_definition_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fairness Definition Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../playbooks/fairness_assessment_playbook/bias_root_cause_analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bias Root Cause Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../playbooks/fairness_assessment_playbook/fairness_metrics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fairness Metrics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Case Study
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Case Study
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Medical Health AI Agent
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Medical Health AI Agent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scenario-note" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scenario Note
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-1-historical-context-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1. Historical Context Assessment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 1. Historical Context Assessment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#historical-pattern-identification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Historical Pattern Identification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-disadvantaged-groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Disadvantaged Groups
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#patterns-of-discrimination" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Patterns of Discrimination
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implications-for-the-ai-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implications for the AI Agent
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-previous-technologies-reflected-and-reinforced-social-hierarchies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How Previous Technologies Reflected and Reinforced Social Hierarchies
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ai-agent-relevance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AI Agent Relevance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pattern-to-risk-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pattern-to-Risk Mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feature-encoding-and-historical-classification-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Feature Encoding and Historical Classification Systems
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#historical-performance-disparities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Historical Performance Disparities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evaluation-metric-bias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evaluation Metric Bias
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prioritization-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prioritization Framework
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historical-connection-very-strong" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Historical Connection — Very Strong
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#potential-harm-severe-and-immediate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Potential Harm — Severe and Immediate
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bias-visibility-low" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bias Visibility — Low
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prioritization-order" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prioritization Order
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historical-pattern-risk-classification-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Historical Pattern Risk Classification Matrix
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Historical Pattern Risk Classification Matrix">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#matrix-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Matrix Components
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#historical-pattern-risk-classification-matrix_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Historical Pattern Risk Classification Matrix
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-the-historical-pattern-risk-classification-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using the Historical Pattern Risk Classification Matrix
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Action
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Action
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fairness Action Playbook
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fairness Action Playbook
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../playbooks/fairness_action_playbook/fairness_action_playbook_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview and Guidance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../playbooks/fairness_action_playbook/causal_fairness_analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Causal Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../playbooks/fairness_action_playbook/pre_processing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pre-Processing (Data)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../playbooks/fairness_action_playbook/in_processing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    In-Processing (Model)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../playbooks/fairness_action_playbook/post_processing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Post-Processing (Outcomes)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../playbooks/fairness_action_playbook/validation_framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../playbooks/fairness_action_playbook/org_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementation Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Case Study
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Case Study
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../loan_approval_fairness_e2e_case/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loan Approval Project
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scenario-note" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scenario Note
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-1-historical-context-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1. Historical Context Assessment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 1. Historical Context Assessment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#historical-pattern-identification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Historical Pattern Identification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-disadvantaged-groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Disadvantaged Groups
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#patterns-of-discrimination" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Patterns of Discrimination
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implications-for-the-ai-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implications for the AI Agent
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-previous-technologies-reflected-and-reinforced-social-hierarchies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How Previous Technologies Reflected and Reinforced Social Hierarchies
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ai-agent-relevance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AI Agent Relevance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pattern-to-risk-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pattern-to-Risk Mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feature-encoding-and-historical-classification-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Feature Encoding and Historical Classification Systems
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#historical-performance-disparities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Historical Performance Disparities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evaluation-metric-bias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evaluation Metric Bias
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prioritization-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prioritization Framework
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historical-connection-very-strong" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Historical Connection — Very Strong
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#potential-harm-severe-and-immediate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Potential Harm — Severe and Immediate
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bias-visibility-low" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bias Visibility — Low
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prioritization-order" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prioritization Order
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historical-pattern-risk-classification-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Historical Pattern Risk Classification Matrix
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Historical Pattern Risk Classification Matrix">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#matrix-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Matrix Components
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#historical-pattern-risk-classification-matrix_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Historical Pattern Risk Classification Matrix
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-the-historical-pattern-risk-classification-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using the Historical Pattern Risk Classification Matrix
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="applying-the-fairness-audit-playbook-to-a-medical-health-ai-agent">Applying the Fairness Audit Playbook to a Medical Health AI Agent</h1>
+<h2 id="context">Context</h2>
+<p>The system under review is a Medical Health AI Agent designed to answer patient questions about symptoms, treatment options, medication usage, and care navigation.
+It is intended to support clinical decision-making and is deployed to a diverse patient population across age, gender, race, disability status, and socioeconomic backgrounds.
+Because healthcare systems have a long history of unequal access, treatment disparities, and biased medical knowledge, a historical-context-aware fairness audit is required before deployment.</p>
+<h2 id="scenario-note">Scenario Note</h2>
+<p>This case study is an illustrative scenario, not based on a specific real-world dataset. It is designed to demonstrate how the Fairness Assessment Playbook applies to a high-risk healthcare AI system. Historical references to discrimination patterns (e.g., the Tuskegee Syphilis Study, J. Marion Sims' experiments) cite documented events and are included to ground the audit in verified historical context.</p>
+<h2 id="step-1-historical-context-assessment">Step 1. Historical Context Assessment</h2>
+<hr />
+<h3 id="historical-pattern-identification">Historical Pattern Identification</h3>
+<p>In healthcare, historical discrimination patterns primarily disadvantaged racial and ethnic minorities, particularly Black and other people of color, alongside women, low-income groups, and those with disabilities. These patterns stem from slavery-era experiments, segregation, and policy exclusions that embedded inequities in access, treatment, and medical knowledge.</p>
+<hr />
+<h3 id="key-disadvantaged-groups">Key Disadvantaged Groups</h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Historical Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Racial and ethnic minorities (e.g., Black Americans)</td>
+<td>Enslaved Black women endured non-consensual surgeries (e.g., J. Marion Sims' VVF experiments without anesthesia). The Tuskegee Syphilis Study (1932–1972) withheld treatment from Black men, fostering lasting distrust.</td>
+</tr>
+<tr>
+<td>Women</td>
+<td>Particularly women of color faced compounded biases in gynecology and obstetrics due to experimental exploitation during slavery.</td>
+</tr>
+<tr>
+<td>Low socioeconomic status</td>
+<td>Jim Crow laws and occupational segregation limited insurance and care access. Medicaid flexibility allowed underfunding for minorities.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="patterns-of-discrimination">Patterns of Discrimination</h3>
+<ul>
+<li>Segregation persisted via "separate but equal" hospitals until Medicare's 1965 enforcement</li>
+<li>Race-based clinical adjustments (e.g., lung function) perpetuated flawed genetic myths</li>
+<li>Structural racism shaped Medicare/Medicaid inequities, denying admissions despite nondiscriminatory policies</li>
+<li>Pain assessment biases underrate minorities' needs, leading to systematic undertreatment</li>
+</ul>
+<hr />
+<h3 id="implications-for-the-ai-agent">Implications for the AI Agent</h3>
+<p>Training data likely inherits these biases, risking inaccurate symptom advice or treatment recommendations for historically marginalized groups such as Black patients or low-income users. Audits must trace data provenance to these patterns for fairness.</p>
+<hr />
+<h3 id="how-previous-technologies-reflected-and-reinforced-social-hierarchies">How Previous Technologies Reflected and Reinforced Social Hierarchies</h3>
+<p><strong>Reflection and Reinforcement</strong></p>
+<ul>
+<li>Early medical tools such as pulse oximeters and spirometers incorporated race-based corrections that assumed biological inferiority of Black patients, leading to inaccurate readings and undertreatment for minorities</li>
+<li>Hospital segregation technologies — separate wards enabled by Hill-Burton Act funding (1946–1960s) — physically entrenched racial divides, limiting Black patients' access to advanced equipment</li>
+</ul>
+<p><strong>Amplification via Diffusion</strong></p>
+<ul>
+<li>Innovative devices like CT scanners and dialysis machines followed a hierarchical diffusion pattern: higher socioeconomic groups adopted them first, widening gaps before eventual trickle-down reduced disparities over decades</li>
+<li>Expensive insulin pumps and robotic surgery systems amplified inequalities by favouring affluent users, entrenching class-based hierarchies</li>
+<li>Digital health apps and EHRs mirrored this — low-income and minority groups faced access barriers, reinforcing historical exclusion</li>
+</ul>
+<p><strong>Rare Challenges to the Pattern</strong></p>
+<ul>
+<li>Community Health Centers (1965 onward) and basic technologies like manual blood pressure cuffs democratized care for underserved populations, narrowing some gaps by design</li>
+<li>However, these were exceptions — most tools had neutral-to-negative effects on biases without intentional equity safeguards</li>
+</ul>
+<hr />
+<h3 id="ai-agent-relevance">AI Agent Relevance</h3>
+<p>The Medical Health AI Agent risks inheriting these patterns if trained on biased historical data from race-adjusted tools or segregated records, potentially underdiagnosing symptoms in disadvantaged groups. Audits should probe training data provenance for such reinforcements.</p>
+<p>Recurring bias mechanisms include:</p>
+<ul>
+<li>Data feedback loops — biased historical records training new tools</li>
+<li>Implicit clinical stereotypes embedded in labels and proxy features (e.g., zip codes for SES)</li>
+<li>Systematic data missingness from disadvantaged groups due to access barriers</li>
+</ul>
+<hr />
+<h3 id="pattern-to-risk-mapping">Pattern-to-Risk Mapping</h3>
+<table>
+<thead>
+<tr>
+<th>Historical Pattern</th>
+<th>AI System Risk</th>
+<th>Target Audit Area</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Racial undertreatment</td>
+<td>Training data skewed by records from segregated care systems underrepresenting minorities</td>
+<td>Data provenance</td>
+</tr>
+<tr>
+<td>Gender bias in pain assessment</td>
+<td>Models undervalue women's symptom reports via historical clinical labels</td>
+<td>Input features and labeling</td>
+</tr>
+<tr>
+<td>Socioeconomic disparities</td>
+<td>Missingness in low-income groups biases model toward affluent outcomes</td>
+<td>Data completeness</td>
+</tr>
+<tr>
+<td>Race-based clinical adjustments</td>
+<td>Model architecture inherits legacy race-based corrections</td>
+<td>Feature selection and encoding</td>
+</tr>
+<tr>
+<td>Intersectional subgroups</td>
+<td>Evaluation metrics overlook combined race-gender-SES interactions</td>
+<td>Subgroup validation</td>
+</tr>
+</tbody>
+</table>
+<p>Target audits on data provenance, feature selection, and subgroup validation to mitigate these mappings.</p>
+<hr />
+<h3 id="feature-encoding-and-historical-classification-systems">Feature Encoding and Historical Classification Systems</h3>
+<p>Race-based systems such as eGFR and spirometer corrections — rooted in 19th-century pseudoscience assuming Black patients' biological inferiority — influence feature definitions by embedding race as a binary or categorical proxy variable in ML pipelines. These legacy encodings carry over into symptom mappings or treatment recommendation features, where race uplifts kidney function estimates or downgrades lung capacity for minorities, skewing AI advice toward White-majority norms.</p>
+<p>Key risks for the Medical Health AI Agent:</p>
+<ul>
+<li>Symptom queries may encode biased thresholds (e.g., higher pain tolerance assumed for men of colour), perpetuating undertreatment via feature engineering inherited from clinical norms</li>
+<li>Encodings often use zip code or surname as implicit race proxies, masking disparities while amplifying historical hierarchies in model inputs</li>
+</ul>
+<p>Mitigation: Audit features for race-derived scalars and replace with social determinants such as SES or access metrics.</p>
+<hr />
+<h3 id="historical-performance-disparities">Historical Performance Disparities</h3>
+<p>Historical performance gaps manifest in healthcare AI models as:</p>
+<ul>
+<li>Lower accuracy for racial minorities, particularly Black patients, due to underrepresented or mislabeled data from unequal testing and treatment</li>
+<li>Higher error rates in predicting illness severity — underestimating sepsis risk or chronic conditions — because training data reflects less frequent testing and lower recorded care costs as proxies for health needs</li>
+<li>20–30% worse sensitivity in diagnostics for women and low-SES groups compared to White affluent males in pain and symptom recognition</li>
+</ul>
+<p>For the Medical Health AI Agent, this risks flawed symptom advice or care navigation for disadvantaged users, amplifying historical undertreatment via poor subgroup precision.</p>
+<p>Mitigation: Evaluate with intersectional metrics such as equalized odds across race-gender-SES strata to detect and flag disparities pre-deployment.</p>
+<hr />
+<h3 id="evaluation-metric-bias">Evaluation Metric Bias</h3>
+<table>
+<thead>
+<tr>
+<th>Issue</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Aggregate metrics mask disparities</td>
+<td>AUC and F1-score, inherited from clinical trials dominated by White males, optimize for well-represented groups while undervaluing sensitivity for symptoms in women or minorities</td>
+</tr>
+<tr>
+<td>Biased threshold calibration</td>
+<td>Thresholds calibrated on biased data (e.g., lower pain scores for Black patients) lead to conservative treatment recommendations, perpetuating undertreatment in AI outputs</td>
+</tr>
+<tr>
+<td>Overall accuracy prioritised over subgroup fairness</td>
+<td>Historical optimization priorities in healthcare — favouring overall accuracy and cost-efficiency for majority-White, affluent patients — embed higher diagnostic thresholds for minorities</td>
+</tr>
+</tbody>
+</table>
+<p>Mitigation: Adopt demographic parity and equalized odds metrics with intersectional thresholds to realign evaluations.</p>
+<h2 id="prioritization-framework">Prioritization Framework</h2>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Rating</th>
+<th>Summary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Historical Connection</td>
+<td>Very Strong</td>
+<td>Training data directly embeds clinical biases (e.g., eGFR race-adjusted algorithms, segregated-era records)</td>
+</tr>
+<tr>
+<td>Potential Harm</td>
+<td>Severe and Immediate</td>
+<td>Misdiagnoses, delayed treatments, deepened healthcare distrust among vulnerable groups</td>
+</tr>
+<tr>
+<td>Bias Visibility</td>
+<td>Low</td>
+<td>Subtle patterns hidden in aggregate metrics — only detectable through targeted disaggregated audits</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="historical-connection-very-strong">Historical Connection — Very Strong</h2>
+<p>The link between historical healthcare inequities and the Medical Health AI Agent is very strong:</p>
+<ul>
+<li>Symptom advice and treatment recommendations directly rely on clinical data steeped in historical bias patterns</li>
+<li>Training datasets from segregated eras and race-adjusted algorithms (e.g., eGFR) embed biases into core components</li>
+<li>Evidence from analogous AI systems shows 20–50% worse performance for minorities</li>
+<li>Real-time clinical decision support for diverse users amplifies risks, mirroring past tools' failures in equitable care</li>
+</ul>
+<p>Action: Prioritize high-mitigation efforts here over weaker historical ties in less data-dependent applications.</p>
+<hr />
+<h2 id="potential-harm-severe-and-immediate">Potential Harm — Severe and Immediate</h2>
+<p>If historical patterns recur in the Medical Health AI Agent, harm is severe and immediate:</p>
+<table>
+<thead>
+<tr>
+<th>Affected Group</th>
+<th>Risk</th>
+<th>Consequence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Racial minorities</td>
+<td>Undertriaged symptom advice (e.g., ignoring Black patients' pain)</td>
+<td>Worsened outcomes — untreated sepsis, 20–30% higher mortality gaps</td>
+</tr>
+<tr>
+<td>Low-SES users</td>
+<td>Compounded errors in care navigation</td>
+<td>Exacerbated access barriers, long-term chronic disease disparities</td>
+</tr>
+<tr>
+<td>Female users</td>
+<td>Gender-biased pain assessment</td>
+<td>Systematic undertreatment, misdiagnosis</td>
+</tr>
+<tr>
+<td>All groups at scale</td>
+<td>Societal damage from mass deployment</td>
+<td>Eroded trust, legal liabilities under EU AI Act</td>
+</tr>
+</tbody>
+</table>
+<p>Action: Mitigation urgency is critical — consequences are high-stakes and irreversible.</p>
+<hr />
+<h2 id="bias-visibility-low">Bias Visibility — Low</h2>
+<p>Potential bias exhibits low visibility for the following reasons:</p>
+<ul>
+<li>Subtle historical patterns (e.g., race-adjusted clinical encodings, underrepresented minority data) manifest indirectly in symptom advice rather than as overt flags</li>
+<li>Aggregate metrics (e.g., overall accuracy) conceal subgroup disparities — targeted audits reveal 20–30% error gaps for Black or low-SES users</li>
+<li>Proxy features such as zip codes obscure racial biases inherited from segregated records, evading standard testing</li>
+<li>High deployment scale across diverse patients heightens hidden risks</li>
+</ul>
+<p>Action: Low visibility elevates prioritization for comprehensive, disaggregated fairness checks.</p>
+<hr />
+<h2 id="prioritization-order">Prioritization Order</h2>
+<table>
+<thead>
+<tr>
+<th>Priority</th>
+<th>Bias Type</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1st</td>
+<td>Racial undertreatment and race-based clinical adjustments</td>
+<td>Directly embedded in training data — drives 20–50% accuracy drops for Black patients in symptom triage</td>
+</tr>
+<tr>
+<td>2nd</td>
+<td>Gender-biased pain recognition</td>
+<td>Historical undervaluation of women's symptoms skews model thresholds across diverse users</td>
+</tr>
+<tr>
+<td>3rd</td>
+<td>Socioeconomic data missingness</td>
+<td>Amplifies disparities in care navigation for low-SES groups via incomplete representations</td>
+</tr>
+<tr>
+<td>Critical</td>
+<td>Intersectional combinations (e.g., Black women)</td>
+<td>Compounded risks demand dedicated subgroup testing</td>
+</tr>
+</tbody>
+</table>
+<h2 id="historical-pattern-risk-classification-matrix"><strong>Historical Pattern Risk Classification Matrix</strong></h2>
+<h3 id="matrix-components"><strong>Matrix Components</strong></h3>
+<ol>
+<li><strong>Historical Pattern</strong>: Specific documented pattern of discrimination with historical evidence.</li>
+<li><strong>Severity</strong>: Impact of this bias if perpetuated (High/Medium/Low):<ul>
+<li>High: Directly impacts fundamental rights or life outcomes.</li>
+<li>Medium: Creates significant disparities in opportunities or resources.</li>
+<li>Low: Creates differential experiences but with limited material impact.</li>
+</ul>
+</li>
+<li><strong>Likelihood</strong>: Probability of this pattern manifesting in AI systems:<ul>
+<li>High: Pattern frequently appears in similar systems.</li>
+<li>Medium: Pattern occasionally appears in similar systems.</li>
+<li>Low: Pattern rarely appears in similar systems.</li>
+</ul>
+</li>
+<li><strong>Relevance</strong>: Applicability to the specific AI system being developed:<ul>
+<li>High: Direct applicability to system's domain/purpose.</li>
+<li>Medium: Partial applicability to certain system components.</li>
+<li>Low: Limited applicability but potential for manifestation.</li>
+</ul>
+</li>
+<li><strong>Priority Score</strong>: Calculated as Severity + Likelihood + Relevance (sum, max = 9):<ul>
+<li>7–9: Critical — Requires immediate mitigation.</li>
+<li>5–6: High — Requires mitigation before launch.</li>
+<li>3–4: Medium — Monitor after launch.</li>
+<li>1–2: Low — No action needed.</li>
+</ul>
+</li>
+</ol>
+<h3 id="historical-pattern-risk-classification-matrix_1"><strong>Historical Pattern Risk Classification Matrix</strong></h3>
+<table>
+<thead>
+<tr>
+<th><strong>Historical Pattern</strong></th>
+<th><strong>Severity (1-3)</strong></th>
+<th><strong>Likelihood (1-3)</strong></th>
+<th><strong>Relevance (1-3)</strong></th>
+<th><strong>Priority Score (Sum)</strong></th>
+<th><strong>Priority Level</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Racial undertreatment of minorities, especially Black patients, via experiments like Tuskegee and biased pain management</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>9</td>
+<td>Critical</td>
+</tr>
+<tr>
+<td>Race-based clinical adjustments in tools like eGFR and spirometers, assuming biological differences</td>
+<td>3</td>
+<td>2</td>
+<td>2</td>
+<td>7</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Gender disparities in symptom recognition, undervaluing women's pain reports historically</td>
+<td>2</td>
+<td>3</td>
+<td>2</td>
+<td>7</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Segregated hospital access and care under Jim Crow laws and Hill-Burton funding, limiting minority exposure to advanced treatments</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>6</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>Socioeconomic barriers causing data missingness for low-income groups in medical records</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>6</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>Biased clinical trials dominated by White male participants, skewing diagnostic norms</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>4</td>
+<td>Low</td>
+</tr>
+</tbody>
+</table>
+<h3 id="using-the-historical-pattern-risk-classification-matrix"><strong>Using the Historical Pattern Risk Classification Matrix</strong></h3>
+<p>Once you have completed the <strong>Historical Pattern Risk Classification Matrix</strong>, it becomes a central tool to guide your fairness assessment and mitigation efforts. Here's how to use it effectively:</p>
+<ol>
+<li><strong>Identify High-Risk Components</strong><ul>
+<li>Review the matrix to see which system components (data, features, model outputs, evaluation metrics) are linked to historical biases with <strong>high severity and high visibility</strong>.</li>
+<li>Focus your initial mitigation efforts on these areas, as they pose the greatest risk to fairness.</li>
+</ul>
+</li>
+<li><strong>Prioritize Interventions</strong><ul>
+<li>Use the risk scores in the matrix to determine which patterns require immediate attention versus monitoring.</li>
+<li>Patterns with high harm potential but low visibility may need <strong>specialized evaluation methods</strong> or additional stakeholder review.</li>
+</ul>
+</li>
+<li><strong>Guide Feature and Data Audits</strong><ul>
+<li>Map high-priority historical patterns to specific datasets or feature definitions.</li>
+<li>Investigate whether these features reflect historical inequities and whether they require re-encoding, balancing, or augmentation.</li>
+</ul>
+</li>
+<li><strong>Inform Model Testing and Evaluation</strong><ul>
+<li>Align your fairness tests with the highest-risk historical patterns identified.</li>
+<li>Ensure that evaluation metrics capture potential disparities across affected groups.</li>
+</ul>
+</li>
+<li><strong>Support Stakeholder Communication</strong><ul>
+<li>The matrix provides a visual and structured summary of risk areas, making it easier to <strong>communicate findings and proposed interventions</strong> to non-technical stakeholders.</li>
+</ul>
+</li>
+<li><strong>Update Iteratively</strong><ul>
+<li>Treat the matrix as a living document. As new data or insights emerge, update the classifications to reflect evolving risks.</li>
+<li>Integrate updates into your CI/CD pipeline or sprint planning to ensure ongoing fairness monitoring.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Outcome:</strong> Using the matrix this way ensures that your fairness efforts are data-driven, risk-prioritized, and actionable, directly linking historical context to practical model interventions.</p>
+<h1 id="step-2-fairness-definitions">Step 2 Fairness Definitions</h1>
+<p>After completing Step 1: Historical Pattern Identification, you now have a clear view of the groups, features, and system components most affected by past inequities. This step provides the evidence base for selecting the right fairness definitions</p>
+<h2 id="demographic-parity-statistical-parity">Demographic Parity (Statistical Parity)</h2>
+<p><strong>Definition</strong>: The probability of receiving a positive outcome (e.g., treatment recommendation) must be identical across protected groups like race, gender, or SES.</p>
+<p><strong>Mathematical form</strong>: P(Ŷ=1 | A=a) = P(Ŷ=1 | A=b) for groups a, b.</p>
+<p><strong>When to Use</strong>: Prioritizes equal access in symptom advice, countering historical exclusion in healthcare.</p>
+<p><strong>Limitations</strong>: Ignores differing symptom base rates; risks over-recommending to low-risk minorities.</p>
+<p><strong>Example</strong>: AI Agent assigns care navigation prompts equally to Black and White patients reporting chest pain, addressing segregation legacies.</p>
+<h2 id="equal-opportunity">Equal Opportunity</h2>
+<p><strong>Definition</strong>: Qualified patients (true condition present) receive positive predictions at equal rates across groups.</p>
+<p><strong>Mathematical form</strong>: P(Ŷ=1 | Y=1, A=a) = P(Ŷ=1 | Y=1, A=b).</p>
+<p><strong>When to Use</strong>: Critical for avoiding false negatives in treatment options, where labels reflect true need despite biased history.</p>
+<p><strong>Limitations</strong>: Relies on potentially skewed ground truth from undertreated groups.</p>
+<p><strong>Example</strong>: Ensures patients with actual infections get medication advice equally, regardless of gender or SES data gaps.</p>
+<h2 id="equalized-odds">Equalized Odds</h2>
+<p><strong>Definition</strong>: True positive and false positive rates equal across groups for all outcomes.</p>
+<p><strong>Mathematical form</strong>: P(Ŷ=1 | Y=y, A=a) = P(Ŷ=1 | Y=y, A=b) for y ∈ {0,1}.</p>
+<p><strong>When to Use</strong>: Balances both over- and under-treatment risks in high-stakes clinical navigation.</p>
+<p><strong>Limitations</strong>: Demands accuracy trade-offs; complex for intersectional checks (e.g., Black women).</p>
+<p><strong>Example</strong>: Matches error rates in flagging urgent symptoms for low-SES vs. affluent users, mitigating trial biases.</p>
+<p>Fairness selection here embodies equity over equality, prioritizing harm reduction from historical disparities in diverse patient support</p>
+<h2 id="selected-definition-documentation-for-medical-health-ai-agent">Selected Definition Documentation for Medical Health AI Agent</h2>
+<p><strong>Primary Fairness Definition Selected</strong>: Equal Opportunity (Equality of True Positive Rates)</p>
+<p><strong>Mathematical Formulation</strong>: P(Ŷ=1 | Y=1, A=a) = P(Ŷ=1 | Y=1, A=b) for protected groups (race, gender, SES).</p>
+<p><strong>Selection Rationale</strong>:</p>
+<p><strong>Connection to historical context</strong>: Racial undertreatment (e.g., Tuskegee, pain biases) and race-based adjustments (e.g., eGFR) systematically overlooked qualified needs in minorities, per Historical Context Assessment. This ensures patients with true conditions (Y=1) get equal symptom/treatment advice despite past disparities.</p>
+<p><strong>Application requirements</strong>: Prioritizes avoiding false negatives in high-stakes care navigation—missing real symptoms harms more than over-flagging mild cases.</p>
+<p><strong>Stakeholder priorities</strong>: Clinical teams seek reliable positives; patients/DEI focus on equitable access countering segregation legacies.</p>
+<p><strong>Trade-off Acknowledgment</strong>:</p>
+<p><strong>Fairness properties not satisfied</strong>: Skips demographic parity (equal recommendation rates) and equalized odds (both error types); representation may vary by base rates.</p>
+<p><strong>Performance implications</strong>: May lower precision by 10-15% via broader recommendations for underrepresented groups, but maintains high recall with negligible outcome impact.</p>
+<p><strong>Monitoring approach</strong>: Track true positive equality across race-gender-SES intersections monthly, plus secondary demographic parity; flag false negative drifts &gt;5% for audit.</p>
+<h1 id="step-3-bias-root-cause-analysis">Step 3. Bias Root Cause Analysis</h1>
+<p>Once you have completed Step 2: Fairness Definition Selection, you have a set of explicit fairness goals tailored to the AI system based on historical patterns and identified risks. The next step is to operationalize these goals by identifying where bias can enter the system.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Bias Type</strong></th>
+<th><strong>Example in AI Medical Agent</strong></th>
+<th><strong>Risk / Impact</strong></th>
+<th><strong>Detection Method</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Historical Bias</td>
+<td>Historical healthcare disparities: Black and Hispanic patients underrepresented in clinical trials</td>
+<td>Systematic underdiagnosis or misclassification for marginalized groups</td>
+<td>Compare predictions to documented healthcare inequities; correlation analysis by demographics</td>
+</tr>
+<tr>
+<td>Representation Bias</td>
+<td>Training data mainly from young adults; elderly and rare conditions underrepresented</td>
+<td>Lower accuracy and generalization for underrepresented patients</td>
+<td>Compare dataset demographics to target population; analyze missing data and quality metrics</td>
+</tr>
+<tr>
+<td>Measurement Bias</td>
+<td>Use of proxies like insurance type; inconsistent symptom coding across hospitals</td>
+<td>Misinterpretation of patient inputs; biased recommendations</td>
+<td>Validate proxy accuracy across groups; audit labeling processes</td>
+</tr>
+<tr>
+<td>Aggregation Bias</td>
+<td>Single model applied to all age groups/comorbidities</td>
+<td>Performance gaps between subgroups; overgeneralized guidance</td>
+<td>Evaluate subgroup performance; conditional feature analysis</td>
+</tr>
+<tr>
+<td>Learning Bias</td>
+<td>Model overfits majority patterns; penalizes rare conditions</td>
+<td>False negatives for minority or rare cases; reinforces majority patterns</td>
+<td>Evaluate fairness metrics (equal opportunity, equalized odds); analyze false negative/positive rates by group</td>
+</tr>
+<tr>
+<td>Evaluation Bias</td>
+<td>Validation set lacks demographic diversity; metrics ignore fairness</td>
+<td>Model appears accurate overall but underperforms for specific populations</td>
+<td>Disaggregate evaluation metrics by demographics; threshold sensitivity analysis</td>
+</tr>
+<tr>
+<td>Deployment Bias</td>
+<td>Patients with low digital literacy or different language use</td>
+<td>Unequal access to guidance; feedback loops reinforce disparities</td>
+<td>Monitor real-world usage by demographics; detect patterns indicating misrecommendations</td>
+</tr>
+</tbody>
+</table>
+<h3 id="bias-source-prioritization-table">Bias Source Prioritization Table</h3>
+<p>Priority Score = (Severity × 0.35) + (Scope × 0.25) + (Persistence × 0.25) + (Historical Alignment × 0.15). Feasibility is tracked separately to sequence work — among High-priority items, address the most feasible first.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Bias Source</strong></th>
+<th><strong>Severity (1-5)</strong></th>
+<th><strong>Scope (1-5)</strong></th>
+<th><strong>Persistence (1-5)</strong></th>
+<th><strong>Historical Alignment (1-5)</strong></th>
+<th><strong>Priority Score</strong></th>
+<th><strong>Priority Level</strong></th>
+<th><strong>Feasibility (1-5)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Historical Bias in Clinical Data</td>
+<td>5</td>
+<td>5</td>
+<td>4</td>
+<td>5</td>
+<td>4.75</td>
+<td>High</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Representation Imbalance (Age, Gender, Ethnicity)</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>4</td>
+<td>4.2</td>
+<td>High</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Learning Bias from Overfitting Majority Patterns</td>
+<td>5</td>
+<td>4</td>
+<td>4</td>
+<td>4</td>
+<td>4.45</td>
+<td>High</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Measurement Bias in Symptom Encoding</td>
+<td>4</td>
+<td>4</td>
+<td>3</td>
+<td>4</td>
+<td>3.85</td>
+<td>Medium</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Aggregation Bias Across Patient Groups</td>
+<td>3</td>
+<td>4</td>
+<td>3</td>
+<td>3</td>
+<td>3.3</td>
+<td>Medium</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Evaluation Bias from Limited Validation Sets</td>
+<td>3</td>
+<td>4</td>
+<td>3</td>
+<td>3</td>
+<td>3.2</td>
+<td>Medium</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Deployment Bias</strong> (digital literacy gaps, language barriers) is post-deployment only and cannot be fully scored pre-launch. Monitoring plan: track recommendation rate disparities by demographic group; alert if divergence exceeds 10% within 30 days of launch.</p>
+<p><strong>Next step:</strong> High-priority items (Historical, Representation, Learning Bias) feed into the <a href="../../playbooks/fairness_action_playbook/fairness_action_playbook_intro/">Fairness Action Playbook</a> — Pre-Processing for data imbalances, In-Processing for learning bias.</p>
+<h1 id="step-4-fairness-metrics">Step 4. Fairness Metrics</h1>
+<p>Once your team has completed Step 3: Bias Source Identification and prioritized the most critical bias sources, the next step is to define how to measure and monitor fairness. This ensures that identified risks are not just theoretical but are actively tracked and mitigated during development, deployment, and operation.</p>
+<table>
+<thead>
+<tr>
+<th>Bias Source</th>
+<th>Problem Type</th>
+<th>Fairness Definition</th>
+<th>Recommended Metrics</th>
+<th>Error Direction Importance</th>
+<th>Uncertainty / Score Usage</th>
+<th>Audit Verification / Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Historical Bias in Clinical Diagnoses</td>
+<td>Classification</td>
+<td>Equal Opportunity</td>
+<td>True Positive Rate Difference</td>
+<td>False negatives more harmful → Negative Residual Difference</td>
+<td>Probabilistic risk scores → Calibration by group, Prediction Interval Coverage</td>
+<td>Retrospective validation: compare historical underdiagnosis rates to model TPR across groups</td>
+</tr>
+<tr>
+<td>Representation Imbalance in Training Data</td>
+<td>Classification</td>
+<td>Demographic Parity</td>
+<td>Selection Rate Difference, Statistical Parity Difference</td>
+<td>Both error types harmful → Absolute Residual Difference</td>
+<td>Document limitations if no uncertainty estimates</td>
+<td>Monitor minority patient representation; compare to population benchmarks; use audit coverage metrics</td>
+</tr>
+<tr>
+<td>Measurement Bias in Symptom Encoding</td>
+<td>Classification</td>
+<td>Individual Fairness</td>
+<td>Individual Consistency, Input–Output Sensitivity</td>
+<td>Underprediction more harmful → Negative Residual Difference</td>
+<td>Probabilistic outputs → Prediction Interval Coverage</td>
+<td>Cross-annotator consistency checks; validate predictions against known clinical outcomes</td>
+</tr>
+<tr>
+<td>Aggregation Bias from Mixed Populations</td>
+<td>Classification</td>
+<td>Equalized Odds</td>
+<td>TPR Difference, FPR Difference</td>
+<td>Both errors harmful → Absolute Residual Difference</td>
+<td>Probabilistic outputs → Calibration metrics</td>
+<td>Subgroup performance audits; compare aggregated vs. disaggregated performance</td>
+</tr>
+<tr>
+<td>Learning Bias from Model Regularization</td>
+<td>Classification</td>
+<td>Equalized Odds</td>
+<td>TPR Difference, FPR Difference</td>
+<td>False negatives more harmful → Negative Residual Difference</td>
+<td>Probabilistic outputs → Calibration by group</td>
+<td>Test audit predictions against minority patient outcomes; track if fairness constraints are enforced</td>
+</tr>
+<tr>
+<td>Evaluation Bias due to Non-Representative Test Set</td>
+<td>Classification</td>
+<td>Predictive Equality</td>
+<td>False Positive Rate Difference</td>
+<td>False positives more harmful → Positive Residual Difference</td>
+<td>Document limitations</td>
+<td>Audit test set diversity; compare predictions to real-world deployment outcomes</td>
+</tr>
+<tr>
+<td>Deployment Bias from Patient Interaction</td>
+<td>Ranking / Recommendation</td>
+<td>Exposure Parity</td>
+<td>Exposure Ratio, NDCG Difference</td>
+<td>Both errors harmful → Absolute Residual Difference</td>
+<td>Probabilistic risk scores → Prediction Interval Coverage</td>
+<td>Continuous monitoring metrics; track interaction disparities; calibrate system periodically</td>
+</tr>
+</tbody>
+</table>
+<h3 id="how-to-use-this-table-in-practice"><strong>How to Use This Table in Practice</strong></h3>
+<ol>
+<li>Start with Bias Sources: Pull your high-priority bias sources from Step 3: Bias Source Identification.</li>
+<li>Identify Problem Type: Classify each bias according to your system outputs: Classification, Regression, Ranking.</li>
+<li>Map Fairness Definition: Use the selected fairness definitions from Step 2 to ensure alignment between ethical priorities and measurement.</li>
+<li>Select Metrics: Choose metrics that quantify the impact of each bias, considering both error type importance and whether probabilistic outputs are provided.</li>
+<li>Validate Statistically: Apply bootstrapping, Bayesian approaches for small samples, and calculate confidence or credible intervals.</li>
+<li>Visualize &amp; Communicate: Use Fairness Disparity Charts and Intersectional Heatmaps to track disparities by demographic and intersectional groups.</li>
+<li>Monitor Continuously: Integrate metrics into post-deployment monitoring to detect emerging biases and adjust the system as needed.</li>
+</ol>
+<p><strong>Thresholds:</strong> Apply defaults from the <a href="../../playbooks/fairness_assessment_playbook/fairness_metrics/#2b-default-thresholds">Fairness Metrics playbook</a>. Given this is a high-risk healthcare system, tighten TPR Difference to ≤ 0.03 before production.</p>
+<p><strong>Tooling:</strong> Fairlearn for TPR/FPR metric computation and disparity charts; Evidently AI for post-deployment drift monitoring.</p>
+<p><strong>Re-audit triggers:</strong>
+- Model retrained on new patient data → re-run full Step 4
+- Monitoring alert exceeds threshold → re-run affected metrics within 5 days
+- New patient demographic added to scope → re-run intersectional evaluation</p>
+<h2 id="next-step-fairness-action-playbook">Next Step: Fairness Action Playbook</h2>
+<p>The assessment above produces three High-priority bias sources, one primary fairness definition (Equal Opportunity), and a set of metrics to track. These feed directly into the <a href="../../playbooks/fairness_action_playbook/fairness_action_playbook_intro/">Fairness Action Playbook</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Bias Source</th>
+<th>Priority</th>
+<th>Recommended Intervention Stage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Historical Bias in Clinical Data</td>
+<td>High</td>
+<td>Pre-Processing — reweighting to reduce label–protected-attribute correlation</td>
+</tr>
+<tr>
+<td>Representation Imbalance (Age, Gender, Ethnicity)</td>
+<td>High</td>
+<td>Pre-Processing — resampling or synthetic data generation for underrepresented groups</td>
+</tr>
+<tr>
+<td>Learning Bias from Overfitting Majority Patterns</td>
+<td>High</td>
+<td>In-Processing — fairness-constrained training with an Equal Opportunity constraint</td>
+</tr>
+<tr>
+<td>Measurement Bias in Symptom Encoding</td>
+<td>Medium</td>
+<td>Pre-Processing — proxy variable transformation (Disparate Impact Removal)</td>
+</tr>
+<tr>
+<td>Aggregation Bias Across Patient Groups</td>
+<td>Medium</td>
+<td>In-Processing — subgroup-specific evaluation and weighted sampling during training</td>
+</tr>
+<tr>
+<td>Evaluation Bias from Limited Validation Sets</td>
+<td>Medium</td>
+<td>Post-Processing — group-specific threshold calibration on a representative held-out set</td>
+</tr>
+<tr>
+<td>Deployment Bias (digital literacy, language barriers)</td>
+<td>Monitor</td>
+<td>Post-deployment only — track recommendation rate disparities by demographic group; alert if divergence exceeds 10% within 30 days of launch</td>
+</tr>
+</tbody>
+</table>
+<p>The primary fairness definition (Equal Opportunity) maps to the In-Processing stage using a True Positive Rate Parity constraint, followed by Post-Processing calibration to correct residual gaps. For a fully worked end-to-end example using the same intervention sequence, see the <a href="../loan_approval_fairness_e2e_case/">Loan Approval Case Study</a>.</p>
+<hr />
+<h2 id="references">References</h2>
+<ul>
+<li>Tuskegee Syphilis Study (1932–1972) — U.S. Public Health Service</li>
+<li>J. Marion Sims' gynecological experiments on enslaved women (1840s)</li>
+<li>Hill-Burton Act (1946) — Hospital Survey and Construction Act</li>
+<li>eGFR race-based adjustments — National Kidney Foundation (revised 2021)</li>
+<li>Obermeyer, Z. et al. (2019) — "Dissecting racial bias in an algorithm 
+  used to manage the health of populations." Science, 366(6464), 447–453.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2026 Tatsiana Donkhina &nbsp;·&nbsp; Code <a href="LICENSE">MIT</a> &nbsp;·&nbsp; Docs <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>
+
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="/CONTRIBUTING/" target="_blank" rel="noopener" title="Contributing" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://linkedin.com/in/tatsianamark/" target="_blank" rel="noopener" title="LinkedIn" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "content.code.copy", "content.action.edit"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

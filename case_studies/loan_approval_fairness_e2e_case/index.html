@@ -1,0 +1,2636 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://tatsianamark.github.io/bias-and-fairness-playbooks/case_studies/loan_approval_fairness_e2e_case/">
+      
+      
+        <link rel="prev" href="../../playbooks/fairness_action_playbook/org_guide/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Loan Approval Project - Bias & Fairness Playbooks</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#fairness-action-playbook-end-to-end-case-study" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Bias &amp; Fairness Playbooks" class="md-header__button md-logo" aria-label="Bias & Fairness Playbooks" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3c-1.27 0-2.4.8-2.82 2H3v2h1.95L2 14c-.47 2 1 3 3.5 3s4.06-1 3.5-3L6.05 7h3.12c.33.85.98 1.5 1.83 1.83V20H2v2h20v-2h-9V8.82c.85-.32 1.5-.97 1.82-1.82h3.13L15 14c-.47 2 1 3 3.5 3s4.06-1 3.5-3l-2.95-7H21V5h-6.17C14.4 3.8 13.27 3 12 3m0 2a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m-6.5 5.25L7 14H4zm13 0L20 14h-3z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Bias & Fairness Playbooks
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Loan Approval Project
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Bias &amp; Fairness Playbooks" class="md-nav__button md-logo" aria-label="Bias & Fairness Playbooks" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3c-1.27 0-2.4.8-2.82 2H3v2h1.95L2 14c-.47 2 1 3 3.5 3s4.06-1 3.5-3L6.05 7h3.12c.33.85.98 1.5 1.83 1.83V20H2v2h20v-2h-9V8.82c.85-.32 1.5-.97 1.82-1.82h3.13L15 14c-.47 2 1 3 3.5 3s4.06-1 3.5-3l-2.95-7H21V5h-6.17C14.4 3.8 13.27 3 12 3m0 2a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m-6.5 5.25L7 14H4zm13 0L20 14h-3z"/></svg>
+
+    </a>
+    Bias & Fairness Playbooks
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Assessment
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Assessment
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fairness Assessment Playbook
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fairness Assessment Playbook
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../playbooks/fairness_assessment_playbook/fairness_assessment_playbook_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview and Guidance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../playbooks/fairness_assessment_playbook/context_and_history_analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Context & History Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../playbooks/fairness_assessment_playbook/fairness_definition_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fairness Definition Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../playbooks/fairness_assessment_playbook/bias_root_cause_analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bias Root Cause Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../playbooks/fairness_assessment_playbook/fairness_metrics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fairness Metrics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Case Study
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Case Study
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../medical_health_ai_agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Medical Health AI Agent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Action
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Action
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fairness Action Playbook
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fairness Action Playbook
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../playbooks/fairness_action_playbook/fairness_action_playbook_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview and Guidance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../playbooks/fairness_action_playbook/causal_fairness_analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Causal Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../playbooks/fairness_action_playbook/pre_processing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pre-Processing (Data)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../playbooks/fairness_action_playbook/in_processing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    In-Processing (Model)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../playbooks/fairness_action_playbook/post_processing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Post-Processing (Outcomes)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../playbooks/fairness_action_playbook/validation_framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../playbooks/fairness_action_playbook/org_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementation Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Case Study
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Case Study
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loan Approval Project
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loan Approval Project
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#data-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Source
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#regulatory-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Regulatory Context
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-causal-fairness-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Causal Fairness Analysis
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Causal Fairness Analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-protected-attribute-identification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Protected Attribute Identification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-mediator-variable-identification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Mediator Variable Identification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-proxy-variable-identification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Proxy Variable Identification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-outcome-variable-identification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 Outcome Variable Identification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-legitimate-predictor-identification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5 Legitimate Predictor Identification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16-causal-graph-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.6 Causal Graph Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-pre-processing-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Pre-Processing (Data)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Pre-Processing (Data)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-system-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 System Context
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-step-1-technique-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Step 1: Technique Selection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-step-2-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Step 2: Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-step-3-evaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Step 3: Evaluation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-in-processing-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. In-Processing (Model)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. In-Processing (Model)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-system-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 System Context
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-step-1-model-architecture-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Step 1: Model Architecture Analysis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-step-2-technique-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Step 2: Technique Selection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-step-3-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Step 3: Implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-step-4-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 Step 4: Verification
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-post-processing-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Post-Processing (Outcomes)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Post-Processing (Outcomes)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-system-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 System Context
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-step-1-technique-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Step 1: Technique Selection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-step-2-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Step 2: Implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-step-3-evaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 Step 3: Evaluation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-cross-stage-metrics-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Cross-Stage Metrics Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-key-takeaways" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Key Takeaways
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-end-to-end-workflow-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. End-to-End Workflow Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#data-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Source
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#regulatory-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Regulatory Context
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-causal-fairness-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Causal Fairness Analysis
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Causal Fairness Analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-protected-attribute-identification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Protected Attribute Identification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-mediator-variable-identification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Mediator Variable Identification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-proxy-variable-identification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Proxy Variable Identification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-outcome-variable-identification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 Outcome Variable Identification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-legitimate-predictor-identification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5 Legitimate Predictor Identification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16-causal-graph-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.6 Causal Graph Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-pre-processing-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Pre-Processing (Data)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Pre-Processing (Data)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-system-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 System Context
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-step-1-technique-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Step 1: Technique Selection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-step-2-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Step 2: Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-step-3-evaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Step 3: Evaluation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-in-processing-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. In-Processing (Model)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. In-Processing (Model)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-system-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 System Context
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-step-1-model-architecture-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Step 1: Model Architecture Analysis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-step-2-technique-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Step 2: Technique Selection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-step-3-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Step 3: Implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-step-4-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 Step 4: Verification
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-post-processing-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Post-Processing (Outcomes)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Post-Processing (Outcomes)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-system-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 System Context
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-step-1-technique-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Step 1: Technique Selection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-step-2-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Step 2: Implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-step-3-evaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 Step 3: Evaluation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-cross-stage-metrics-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Cross-Stage Metrics Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-key-takeaways" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Key Takeaways
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-end-to-end-workflow-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. End-to-End Workflow Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="fairness-action-playbook-end-to-end-case-study">Fairness Action Playbook: End-to-End Case Study</h1>
+<p>This document integrates the Causal Fairness Analysis, Pre-Processing, In-Processing, and Post-Processing Fairness Guides into a single workflow using a loan approval dataset as an example. It demonstrates how to address bias across protected and intersectional groups for both internal models and 3rd-party AI APIs.</p>
+<hr />
+<h2 id="data-source">Data Source</h2>
+<p>This case study uses the German Credit Dataset.</p>
+<p><strong>Original author:</strong> Dr. Hans Hofmann, University of Hamburg<br />
+<strong>Source:</strong> <a href="https://archive.ics.uci.edu/ml/datasets/statlog+(german+credit+data)">UCI Machine Learning Repository</a><br />
+<strong>Via:</strong> <a href="https://www.kaggle.com/datasets/jumpingdino/german-credit-dataset">Kaggle</a><br />
+<strong>License:</strong> <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a><br />
+<strong>Changes:</strong> None — data used as-is for illustrative purposes only</p>
+<hr />
+<h2 id="regulatory-context">Regulatory Context</h2>
+<p>This system is a <strong>credit / loan approval</strong> model. The following regulatory obligations apply and shape every design decision in this case study.</p>
+<table>
+<thead>
+<tr>
+<th>Framework</th>
+<th>Obligation</th>
+<th>Impact on This Case Study</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ECOA (Equal Credit Opportunity Act)</strong></td>
+<td>Prohibits discrimination in credit decisions on the basis of sex, age, and national origin. Requires adverse action notices.</td>
+<td>Fairness metrics must cover <code>status_and_sex</code>, <code>age</code>, and <code>is_foreign_worker</code>. Results must be documented for fair lending examination.</td>
+</tr>
+<tr>
+<td><strong>Fair Housing Act (FHA)</strong></td>
+<td>Extends ECOA protections to housing-related credit.</td>
+<td>Applies where <code>purpose</code> includes housing-related loan types.</td>
+</tr>
+<tr>
+<td><strong>GDPR Art. 22</strong> <em>(if EU-deployed)</em></td>
+<td>Prohibits solely automated decisions with legal effect without human review. Requires a DPIA.</td>
+<td>Post-processing threshold decisions must include a human review path for borderline cases. Protected attributes used for calibration require a documented lawful basis.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Documentation checklist for this deployment:</strong></p>
+<ul>
+<li>[ ] Fair lending examination readiness report covering disparate impact analysis</li>
+<li>[ ] Adverse action notice process for rejected applicants</li>
+<li>[ ] Model risk management documentation (SR 11-7 or equivalent)</li>
+<li>[ ] DPIA if deployed in EU jurisdiction</li>
+</ul>
+<hr />
+<h2 id="1-causal-fairness-analysis">1. Causal Fairness Analysis</h2>
+<p><strong>Dataset Columns</strong>:</p>
+<p><code>['status_account', 'month_duration', 'credit_history', 'purpose', 'credit_amount', 'status_savings', 'years_employment', 'payment_to_income_ratio', 'status_and_sex', 'secondary_obligor', 'residence_since', 'collateral', 'age', 'other_installment_plans', 'housing', 'n_credits', 'job', 'n_guarantors', 'telephone', 'is_foreign_worker', 'target']</code></p>
+<h3 id="11-protected-attribute-identification">1.1 Protected Attribute Identification</h3>
+<p>Primary protected attributes (legally or ethically important):</p>
+<ul>
+<li><code>status_and_sex</code> → Gender / Sex  </li>
+<li><code>age</code> → Age  </li>
+<li><code>is_foreign_worker</code> → Foreign worker status / Nationality  </li>
+</ul>
+<p>Intersectional categories:</p>
+<ul>
+<li><code>sex_age</code> → Combination of gender and age (e.g., Male_35, Female_60)  </li>
+<li><code>sex_foreign</code> → Gender × foreign worker (e.g., Male_Yes, Female_No)  </li>
+<li><code>age_foreign</code> → Age × foreign worker (e.g., 25_Yes, 60_No)  </li>
+</ul>
+<p>Include intersectional columns in causal graphs to capture compounded bias.</p>
+<hr />
+<h3 id="12-mediator-variable-identification">1.2 Mediator Variable Identification</h3>
+<table>
+<thead>
+<tr>
+<th>Mediator Variable</th>
+<th>Evidence for Causal Relationship</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>years_employment</code></td>
+<td>Age and gender historically affect employment duration</td>
+</tr>
+<tr>
+<td><code>payment_to_income_ratio</code></td>
+<td>Gender and foreign status influence income levels affecting debt ratios</td>
+</tr>
+<tr>
+<td><code>status_account</code></td>
+<td>Age or foreign worker status may influence account type or status</td>
+</tr>
+<tr>
+<td><code>housing</code></td>
+<td>Income and employment (linked to protected attributes) influence housing situation</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="13-proxy-variable-identification">1.3 Proxy Variable Identification</h3>
+<table>
+<thead>
+<tr>
+<th>Proxy Variable</th>
+<th>Correlated Attribute</th>
+<th>Evidence for Correlation</th>
+<th>Possible Common Causes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>job</code></td>
+<td>Gender, Age</td>
+<td>Certain jobs dominated by specific groups</td>
+<td>Education access, social norms</td>
+</tr>
+<tr>
+<td><code>n_credits</code></td>
+<td>Age</td>
+<td>Older individuals tend to have more credit history</td>
+<td>Age → life experience → credit applications</td>
+</tr>
+<tr>
+<td><code>collateral</code></td>
+<td>Foreign status</td>
+<td>Foreign workers may have fewer assets</td>
+<td>Immigration rules or local ownership laws</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="14-outcome-variable-identification">1.4 Outcome Variable Identification</h3>
+<table>
+<thead>
+<tr>
+<th>Outcome Variable</th>
+<th>Evaluation Metrics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>target</code> → Loan approval or default</td>
+<td>Accuracy, AUC, demographic parity difference, equalized odds, subgroup error rates</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="15-legitimate-predictor-identification">1.5 Legitimate Predictor Identification</h3>
+<table>
+<thead>
+<tr>
+<th>Predictor Variable</th>
+<th>Justification</th>
+<th>Proxy Risk</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>credit_amount</code></td>
+<td>Requested loan size logically influences repayment risk</td>
+<td>Low</td>
+</tr>
+<tr>
+<td><code>credit_history</code></td>
+<td>Past behavior predicts likelihood of repayment</td>
+<td>Low — but historical discrimination may have limited access to credit for protected groups</td>
+</tr>
+<tr>
+<td><code>month_duration</code></td>
+<td>Loan term affects risk of default</td>
+<td>Low</td>
+</tr>
+<tr>
+<td><code>purpose</code></td>
+<td>Purpose of loan impacts repayment likelihood</td>
+<td>Low</td>
+</tr>
+<tr>
+<td><code>status_savings</code></td>
+<td>Savings buffer directly reduces default risk</td>
+<td>Medium — may correlate with <code>is_foreign_worker</code> (foreign workers may have lower savings due to remittance or lower wages); check correlation before use</td>
+</tr>
+<tr>
+<td><code>other_installment_plans</code></td>
+<td>Existing obligations affect repayment capacity</td>
+<td>Low</td>
+</tr>
+<tr>
+<td><code>secondary_obligor</code></td>
+<td>Co-applicant or guarantor reduces default risk</td>
+<td>Medium — women historically more likely to require co-signers; monitor approval rate impact</td>
+</tr>
+<tr>
+<td><code>residence_since</code></td>
+<td>Address stability is a repayment risk indicator</td>
+<td>High — strong proxy for <code>is_foreign_worker</code>; apply Disparate Impact Removal before use</td>
+</tr>
+<tr>
+<td><code>n_guarantors</code></td>
+<td>Number of guarantors reduces lender exposure</td>
+<td>Medium — may correlate with gender; validate before including</td>
+</tr>
+<tr>
+<td><code>telephone</code></td>
+<td>Registered landline as a stability proxy</td>
+<td>High — near-universal in modern data, low predictive value, known proxy for socioeconomic status; <strong>exclude or transform</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="16-causal-graph-example">1.6 Causal Graph Example</h3>
+<p>The causal graph represents relationships between protected attributes, mediators, proxies, and the final outcome, showing potential bias pathways.</p>
+<p><img alt="Causal Graph Example" src="../../images/causal_graph_cs.png" /></p>
+<p>The graph below encodes the same structure programmatically for reproducibility and auditability:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">dowhy</span><span class="w"> </span><span class="kn">import</span> <span class="n">CausalModel</span>
+
+<span class="n">causal_graph</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">digraph {</span>
+<span class="s2">    /* --- Protected → Mediators --- */</span>
+<span class="s2">    status_and_sex -&gt; years_employment;</span>
+<span class="s2">    status_and_sex -&gt; payment_to_income_ratio;</span>
+<span class="s2">    status_and_sex -&gt; secondary_obligor;</span>
+<span class="s2">    age            -&gt; years_employment;</span>
+<span class="s2">    age            -&gt; status_account;</span>
+<span class="s2">    age            -&gt; n_credits;</span>
+<span class="s2">    is_foreign_worker -&gt; payment_to_income_ratio;</span>
+<span class="s2">    is_foreign_worker -&gt; collateral;</span>
+<span class="s2">    is_foreign_worker -&gt; residence_since;</span>
+<span class="s2">    is_foreign_worker -&gt; status_savings;</span>
+
+<span class="s2">    /* --- Protected → Proxies --- */</span>
+<span class="s2">    status_and_sex -&gt; job;</span>
+<span class="s2">    status_and_sex -&gt; n_guarantors;</span>
+<span class="s2">    age            -&gt; telephone;</span>
+<span class="s2">    is_foreign_worker -&gt; telephone;</span>
+
+<span class="s2">    /* --- Protected → Outcome (direct discrimination paths to monitor) --- */</span>
+<span class="s2">    status_and_sex -&gt; target;</span>
+<span class="s2">    age            -&gt; target;</span>
+<span class="s2">    is_foreign_worker -&gt; target;</span>
+
+<span class="s2">    /* --- Mediators → Outcome --- */</span>
+<span class="s2">    years_employment      -&gt; target;</span>
+<span class="s2">    payment_to_income_ratio -&gt; target;</span>
+<span class="s2">    status_account        -&gt; target;</span>
+<span class="s2">    housing               -&gt; target;</span>
+
+<span class="s2">    /* --- Proxies → Outcome --- */</span>
+<span class="s2">    job            -&gt; target;</span>
+<span class="s2">    n_credits      -&gt; target;</span>
+<span class="s2">    collateral     -&gt; target;</span>
+<span class="s2">    residence_since -&gt; target;</span>
+<span class="s2">    telephone      -&gt; target;</span>
+
+<span class="s2">    /* --- Legitimate Predictors → Outcome --- */</span>
+<span class="s2">    credit_amount          -&gt; target;</span>
+<span class="s2">    credit_history         -&gt; target;</span>
+<span class="s2">    month_duration         -&gt; target;</span>
+<span class="s2">    purpose                -&gt; target;</span>
+<span class="s2">    status_savings         -&gt; target;</span>
+<span class="s2">    other_installment_plans -&gt; target;</span>
+<span class="s2">    secondary_obligor      -&gt; target;</span>
+<span class="s2">    n_guarantors           -&gt; target;</span>
+<span class="s2">}</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">CausalModel</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+    <span class="n">treatment</span><span class="o">=</span><span class="s2">&quot;status_and_sex&quot;</span><span class="p">,</span>
+    <span class="n">outcome</span><span class="o">=</span><span class="s2">&quot;target&quot;</span><span class="p">,</span>
+    <span class="n">graph</span><span class="o">=</span><span class="n">causal_graph</span>
+<span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">view_model</span><span class="p">()</span>
+</code></pre></div>
+<hr />
+<h2 id="2-pre-processing-data">2. Pre-Processing (Data)</h2>
+<p>This step demonstrates bias mitigation in input data for internal models and 3rd-party APIs.</p>
+<h3 id="21-system-context">2.1 System Context</h3>
+<ul>
+<li>Dataset: German Credit dataset with 20+ features  </li>
+<li>Protected attributes: <code>status_and_sex</code>, <code>age</code>, <code>is_foreign_worker</code>  </li>
+<li>Outcome: <code>target</code>  </li>
+<li>Observed bias patterns: Mediators (<code>years_employment</code>, <code>payment_to_income_ratio</code>), proxies (<code>job</code>, <code>n_credits</code>, <code>collateral</code>), intersectional bias (<code>sex_age</code>, <code>sex_foreign</code>, <code>age_foreign</code>)  </li>
+<li>Fairness goal: Equal opportunity across all groups</li>
+</ul>
+<p>Why equal opportunity — not demographic parity or calibration:</p>
+<p>Equal opportunity was selected because the primary harm to prevent is qualified applicants being incorrectly denied credit (false negatives). Under ECOA, this is the most legally significant disparity — a higher false negative rate for a protected group constitutes disparate treatment regardless of overall approval rates.</p>
+<table>
+<thead>
+<tr>
+<th>Definition considered</th>
+<th>What it equalises</th>
+<th>Why not chosen</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Demographic parity</strong></td>
+<td>Selection rates across groups</td>
+<td>Would force approval of proportionally equal numbers regardless of creditworthiness — conflicts with legitimate risk-based lending</td>
+</tr>
+<tr>
+<td><strong>Equalized odds</strong></td>
+<td>Both TPR and FPR across groups</td>
+<td>Stricter than needed here; equalising FPR adds complexity without material benefit in this low-base-rate lending context</td>
+</tr>
+<tr>
+<td><strong>Equal opportunity</strong></td>
+<td>True positive rates (approved given creditworthy)</td>
+<td>Directly addresses the ECOA concern; preserves risk-based rejection for non-creditworthy applicants</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Trade-off accepted:</strong> Overall approval rates may still differ across groups if their creditworthiness distributions differ. This is monitored but not corrected.</p>
+<p>For 3rd-party APIs, interventions focus on input transformations and monitoring outputs.</p>
+<hr />
+<h3 id="22-step-1-technique-selection">2.2 Step 1: Technique Selection</h3>
+<table>
+<thead>
+<tr>
+<th>Bias Type</th>
+<th>Feature(s)</th>
+<th>Internal Model Intervention</th>
+<th>3rd-Party API Intervention</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mediator Discrimination</td>
+<td><code>years_employment</code></td>
+<td>Transform to relevant experience metric</td>
+<td>Transform input values before sending API request</td>
+</tr>
+<tr>
+<td>Mediator Discrimination</td>
+<td><code>payment_to_income_ratio</code></td>
+<td>Conditional instance weighting</td>
+<td>Balanced input batches, repeat underrepresented inputs</td>
+</tr>
+<tr>
+<td>Proxy Discrimination</td>
+<td><code>job</code></td>
+<td>Disparate impact removal</td>
+<td>Transform API input feature before request</td>
+</tr>
+<tr>
+<td>Proxy Discrimination</td>
+<td><code>n_credits</code></td>
+<td>Feature scaling</td>
+<td>Normalize API input feature</td>
+</tr>
+<tr>
+<td>Proxy Discrimination</td>
+<td><code>collateral</code></td>
+<td>Fair representations</td>
+<td>Map API inputs into fairness-aware latent space</td>
+</tr>
+<tr>
+<td>Intersectional Groups</td>
+<td><code>sex_age</code>, <code>sex_foreign</code>, <code>age_foreign</code></td>
+<td>Generate synthetic data for minority subgroups</td>
+<td>Generate synthetic input examples for testing and evaluation</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="23-step-2-configuration">2.3 Step 2: Configuration</h3>
+<ul>
+<li>Feature transformation (<code>years_employment</code>) adjusts for caregiving gaps and adds skill currency metrics  </li>
+<li>Instance weighting (<code>payment_to_income_ratio</code>) balances protected group representation  </li>
+<li>Disparate impact removal (<code>job</code>) reduces correlation with protected attributes  </li>
+<li>Fair representations (<code>collateral</code>) mask foreign worker status  </li>
+<li>Synthetic data supports small intersectional subgroups</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aif360.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">BinaryLabelDataset</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">aif360.algorithms.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Reweighing</span><span class="p">,</span> <span class="n">DisparateImpactRemover</span>
+
+<span class="n">privileged_groups</span>   <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;status_and_sex&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}]</span>   <span class="c1"># male</span>
+<span class="n">unprivileged_groups</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;status_and_sex&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}]</span>   <span class="c1"># female</span>
+
+<span class="c1"># Step 1 — instance reweighting for payment_to_income_ratio imbalance</span>
+<span class="n">rw</span> <span class="o">=</span> <span class="n">Reweighing</span><span class="p">(</span><span class="n">unprivileged_groups</span><span class="o">=</span><span class="n">unprivileged_groups</span><span class="p">,</span>
+                <span class="n">privileged_groups</span><span class="o">=</span><span class="n">privileged_groups</span><span class="p">)</span>
+<span class="n">dataset_reweighted</span> <span class="o">=</span> <span class="n">rw</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">dataset_train</span><span class="p">)</span>
+
+<span class="c1"># Step 2 — disparate impact removal on proxy feature `job`</span>
+<span class="n">di</span> <span class="o">=</span> <span class="n">DisparateImpactRemover</span><span class="p">(</span><span class="n">repair_level</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">sensitive_attribute</span><span class="o">=</span><span class="s2">&quot;status_and_sex&quot;</span><span class="p">)</span>
+<span class="n">dataset_transformed</span> <span class="o">=</span> <span class="n">di</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">dataset_reweighted</span><span class="p">)</span>
+
+<span class="c1"># Step 3 — synthetic data for small intersectional subgroup (female × foreign worker)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sdv.single_table</span><span class="w"> </span><span class="kn">import</span> <span class="n">GaussianCopulaSynthesizer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sdv.metadata</span><span class="w"> </span><span class="kn">import</span> <span class="n">SingleTableMetadata</span>
+
+<span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;status_and_sex&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;is_foreign_worker&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">df_minority</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+
+<span class="n">metadata</span> <span class="o">=</span> <span class="n">SingleTableMetadata</span><span class="p">()</span>
+<span class="n">metadata</span><span class="o">.</span><span class="n">detect_from_dataframe</span><span class="p">(</span><span class="n">df_minority</span><span class="p">)</span>
+<span class="n">synthesizer</span> <span class="o">=</span> <span class="n">GaussianCopulaSynthesizer</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
+<span class="n">synthesizer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_minority</span><span class="p">)</span>
+<span class="n">df_synthetic</span> <span class="o">=</span> <span class="n">synthesizer</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">num_rows</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h3 id="24-step-3-evaluation">2.4 Step 3: Evaluation</h3>
+<p><strong>Acceptance thresholds (set before pre-processing):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Threshold</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Equal opportunity gap (gender)</td>
+<td>≤ 0.06</td>
+<td>Pre-processing alone will not close the full gap; in-processing handles the remainder</td>
+</tr>
+<tr>
+<td>AUC degradation</td>
+<td>≤ 0.02</td>
+<td>Transformations must not destroy predictive signal</td>
+</tr>
+<tr>
+<td>Proxy correlation reduction (<code>job</code> × <code>status_and_sex</code>)</td>
+<td>Pearson r drop ≥ 0.15</td>
+<td>Confirms Disparate Impact Removal had material effect</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Results after pre-processing:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">fairlearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">MetricFrame</span><span class="p">,</span> <span class="n">true_positive_rate</span><span class="p">,</span> <span class="n">false_positive_rate</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">roc_auc_score</span><span class="p">,</span> <span class="n">accuracy_score</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">GradientBoostingClassifier</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Train a baseline model on the transformed training data. Verify that pre-processing transformations preserved predictive signal before proceeding to in-processing.</span>
+<span class="n">baseline_model</span> <span class="o">=</span> <span class="n">GradientBoostingClassifier</span><span class="p">(</span>
+    <span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+<span class="c1"># X_train_transformed: output of DisparateImpactRemover + Reweighing pipeline</span>
+<span class="c1"># X_val_transformed:   same transformations applied to validation set</span>
+<span class="n">baseline_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_transformed</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span>
+                   <span class="n">sample_weight</span><span class="o">=</span><span class="n">dataset_reweighted</span><span class="o">.</span><span class="n">instance_weights</span><span class="p">)</span>
+
+<span class="c1"># Evaluate fairness and predictive performance on validation set</span>
+<span class="n">mf</span> <span class="o">=</span> <span class="n">MetricFrame</span><span class="p">(</span>
+    <span class="n">metrics</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;accuracy&quot;</span><span class="p">:</span> <span class="n">accuracy_score</span><span class="p">,</span>
+        <span class="s2">&quot;tpr&quot;</span><span class="p">:</span>      <span class="n">true_positive_rate</span><span class="p">,</span>
+        <span class="s2">&quot;fpr&quot;</span><span class="p">:</span>      <span class="n">false_positive_rate</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="n">y_true</span><span class="o">=</span><span class="n">y_val</span><span class="p">,</span>
+    <span class="n">y_pred</span><span class="o">=</span><span class="n">baseline_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val_transformed</span><span class="p">),</span>
+    <span class="n">sensitive_features</span><span class="o">=</span><span class="n">df_val</span><span class="p">[</span><span class="s2">&quot;status_and_sex&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mf</span><span class="o">.</span><span class="n">by_group</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Equal opportunity gap:&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">mf</span><span class="o">.</span><span class="n">difference</span><span class="p">()[</span><span class="s2">&quot;tpr&quot;</span><span class="p">],</span> <span class="mi">4</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;AUC:&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">roc_auc_score</span><span class="p">(</span>
+    <span class="n">y_val</span><span class="p">,</span> <span class="n">baseline_model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_val_transformed</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]),</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="c1"># Also evaluate age gap to track intersectional progress</span>
+<span class="n">mf_age</span> <span class="o">=</span> <span class="n">MetricFrame</span><span class="p">(</span>
+    <span class="n">metrics</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;tpr&quot;</span><span class="p">:</span> <span class="n">true_positive_rate</span><span class="p">},</span>
+    <span class="n">y_true</span><span class="o">=</span><span class="n">y_val</span><span class="p">,</span>
+    <span class="n">y_pred</span><span class="o">=</span><span class="n">baseline_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val_transformed</span><span class="p">),</span>
+    <span class="n">sensitive_features</span><span class="o">=</span><span class="n">df_val</span><span class="p">[</span><span class="s2">&quot;age_bucket&quot;</span><span class="p">]</span>   <span class="c1"># bucketed age: e.g. &lt;30, 30-60, &gt;60</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Equal opportunity gap (age):&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">mf_age</span><span class="o">.</span><span class="n">difference</span><span class="p">()[</span><span class="s2">&quot;tpr&quot;</span><span class="p">],</span> <span class="mi">4</span><span class="p">))</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Baseline</th>
+<th>Post Pre-Processing</th>
+<th>Target</th>
+<th>Pass?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AUC</td>
+<td>0.82</td>
+<td>0.81</td>
+<td>≥ 0.80</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>Equal opp. gap (gender)</td>
+<td>0.08</td>
+<td>0.05</td>
+<td>≤ 0.06</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>Equal opp. gap (age)</td>
+<td>0.06</td>
+<td>0.04</td>
+<td>≤ 0.06</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>Intersectional max gap (women &gt;60)</td>
+<td>0.12</td>
+<td>0.08</td>
+<td>≤ 0.10</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>Proxy correlation <code>job</code> × <code>status_and_sex</code></td>
+<td>r = 0.31</td>
+<td>r = 0.14</td>
+<td>drop ≥ 0.15</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+<p>Pre-processing reduced the gender equal opportunity gap from 0.08 to 0.05 and cut the proxy correlation on <code>job</code> by 0.17. Residual bias is passed to the in-processing stage for further correction.</p>
+<hr />
+<h2 id="3-in-processing-model">3. In-Processing (Model)</h2>
+<h3 id="31-system-context">3.1 System Context</h3>
+<ul>
+<li>Model: Gradient boosting classifier  </li>
+<li>Observed disparities: Gender gap 70% male vs 62% female, older applicants underrepresented, intersectional gaps for women and foreign workers  </li>
+<li>Goal: Equal opportunity across gender, age, and foreign worker status</li>
+</ul>
+<h3 id="32-step-1-model-architecture-analysis">3.2 Step 1: Model Architecture Analysis</h3>
+<ul>
+<li>Model type: Tree-based gradient boosting  </li>
+<li>Constraints: Explainability required, 30% max training time increase  </li>
+<li>Compatibility: Fairness regularization and specialized algorithms are most effective  </li>
+</ul>
+<h3 id="33-step-2-technique-selection">3.3 Step 2: Technique Selection</h3>
+<ul>
+<li>Selected technique: Fair splitting with weighted samples  </li>
+<li>Secondary technique: Regularized tree induction  </li>
+<li>3rd-party API note: In-training interventions not possible; rely on pre-processing and post-processing</li>
+</ul>
+<h3 id="34-step-3-implementation">3.4 Step 3: Implementation</h3>
+<ul>
+<li>Modify splitting criteria to penalize subgroup disparity  </li>
+<li>False negative penalties weighted by protected attributes  </li>
+<li>Early stopping based on fairness metrics  </li>
+<li>Reserve 20% of data for validation</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">fairlearn.reductions</span><span class="w"> </span><span class="kn">import</span> <span class="n">GridSearch</span><span class="p">,</span> <span class="n">TruePositiveRateParity</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">GradientBoostingClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fairlearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">MetricFrame</span><span class="p">,</span> <span class="n">true_positive_rate</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">balanced_accuracy_score</span>
+
+<span class="n">estimator</span> <span class="o">=</span> <span class="n">GradientBoostingClassifier</span><span class="p">(</span>
+    <span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span>
+<span class="p">)</span>
+
+<span class="c1"># TruePositiveRateParity enforces equal TPR across groups only (Equal Opportunity).</span>
+<span class="n">constraint</span> <span class="o">=</span> <span class="n">TruePositiveRateParity</span><span class="p">(</span><span class="n">difference_bound</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span>
+
+<span class="n">sweep</span> <span class="o">=</span> <span class="n">GridSearch</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">constraint</span><span class="p">,</span> <span class="n">grid_size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">sweep</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">sensitive_features</span><span class="o">=</span><span class="n">df_train</span><span class="p">[</span><span class="s2">&quot;status_and_sex&quot;</span><span class="p">])</span>
+
+<span class="c1"># Select the predictor with the best balanced accuracy that satisfies the constraint</span>
+<span class="n">best_idx</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span>
+    <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sweep</span><span class="o">.</span><span class="n">predictors_</span><span class="p">)),</span>
+    <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">balanced_accuracy_score</span><span class="p">(</span>
+        <span class="n">y_val</span><span class="p">,</span> <span class="n">sweep</span><span class="o">.</span><span class="n">predictors_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+<span class="n">best_model</span> <span class="o">=</span> <span class="n">sweep</span><span class="o">.</span><span class="n">predictors_</span><span class="p">[</span><span class="n">best_idx</span><span class="p">]</span>
+
+<span class="c1"># Verify equal opportunity gap on validation set</span>
+<span class="n">mf</span> <span class="o">=</span> <span class="n">MetricFrame</span><span class="p">(</span>
+    <span class="n">metrics</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;tpr&quot;</span><span class="p">:</span> <span class="n">true_positive_rate</span><span class="p">},</span>
+    <span class="n">y_true</span><span class="o">=</span><span class="n">y_val</span><span class="p">,</span>
+    <span class="n">y_pred</span><span class="o">=</span><span class="n">best_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val</span><span class="p">),</span>
+    <span class="n">sensitive_features</span><span class="o">=</span><span class="n">df_val</span><span class="p">[</span><span class="s2">&quot;status_and_sex&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mf</span><span class="o">.</span><span class="n">by_group</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Equal opportunity gap:&quot;</span><span class="p">,</span> <span class="n">mf</span><span class="o">.</span><span class="n">difference</span><span class="p">()[</span><span class="s2">&quot;tpr&quot;</span><span class="p">])</span>
+</code></pre></div>
+<h3 id="35-step-4-verification">3.5 Step 4: Verification</h3>
+<p><strong>Acceptance thresholds (set before training):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Threshold</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Equal opportunity gap</td>
+<td>≤ 0.03 (3%)</td>
+<td>ECOA disparate impact standard; baseline gap of 0.08 warranted aggressive target</td>
+</tr>
+<tr>
+<td>AUC degradation</td>
+<td>≤ 0.02</td>
+<td>Business requirement: model must retain predictive validity for risk-based lending</td>
+</tr>
+<tr>
+<td>Feature importance shift</td>
+<td>Top-5 features stable</td>
+<td>Explainability requirement for regulatory examination</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Results:</strong></p>
+<ul>
+<li>Baseline AUC: 0.82, gender gap: 0.08, age gap: 0.06  </li>
+<li>Fairness-enhanced model AUC: 0.81 ✓, gender gap: 0.02 ✓, age gap: 0.03 ✓  </li>
+<li>Feature importance rankings stable ✓, explainability maintained ✓  </li>
+<li>Robustness: consistent across protected group segments and random seeds</li>
+</ul>
+<hr />
+<h2 id="4-post-processing-outcomes">4. Post-Processing (Outcomes)</h2>
+<h3 id="41-system-context">4.1 System Context</h3>
+<ul>
+<li>Model outputs: default probability scores 0-1, threshold 0.15  </li>
+<li>Observed disparities after pre- and in-processing: gender gap men 70%, women 64%, intersectional gaps remain</li>
+</ul>
+<h3 id="42-step-1-technique-selection">4.2 Step 1: Technique Selection</h3>
+<ul>
+<li>Fairness goal: Equal opportunity  </li>
+<li>Deployment constraints: Protected attributes cannot be used at decision time — a single uniform threshold is applied to all applicants at inference. Protected attributes are only used offline (during calibration fitting on validation data) and for monitoring post-deployment.</li>
+<li>Model outputs: Probability scores  </li>
+<li>Selected techniques: Probability calibration (offline, per group), score transformation, uniform decision threshold</li>
+</ul>
+<h3 id="43-step-2-implementation">4.3 Step 2: Implementation</h3>
+<ul>
+<li>Calibration: <code>ThresholdOptimizer</code> fitted offline on validation data with group labels. At inference, two paths are available depending on jurisdiction — see code below.</li>
+<li>Decision threshold: Optimised per group offline; applied as a single merged threshold at inference when group labels are unavailable.</li>
+<li>Monitoring: Track subgroup approval rates and calibration errors post-deployment.</li>
+</ul>
+<blockquote>
+<p><strong>Protected attribute at inference — two legal contexts:</strong><br />
+ECOA permits using protected attributes for <em>remediation</em> (correcting demonstrated disparities) in some jurisdictions. Where legally permitted, Path A below gives stronger fairness correction. Where prohibited, Path B applies a single merged threshold with no group label at inference. Confirm with legal counsel before choosing a path.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">fairlearn.postprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThresholdOptimizer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fairlearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">MetricFrame</span><span class="p">,</span> <span class="n">true_positive_rate</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+
+<span class="c1"># --- Offline fitting (always uses group labels — this is validation-time work) ---</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">ThresholdOptimizer</span><span class="p">(</span>
+    <span class="n">estimator</span><span class="o">=</span><span class="n">best_model</span><span class="p">,</span>
+    <span class="n">constraints</span><span class="o">=</span><span class="s2">&quot;true_positive_rate_parity&quot;</span><span class="p">,</span>  <span class="c1"># matches Equal Opportunity goal</span>
+    <span class="n">objective</span><span class="o">=</span><span class="s2">&quot;balanced_accuracy_score&quot;</span><span class="p">,</span>
+    <span class="n">predict_method</span><span class="o">=</span><span class="s2">&quot;predict_proba&quot;</span><span class="p">,</span>
+    <span class="n">prefit</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+<span class="n">optimizer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">,</span> <span class="n">sensitive_features</span><span class="o">=</span><span class="n">df_val</span><span class="p">[</span><span class="s2">&quot;status_and_sex&quot;</span><span class="p">])</span>
+
+
+<span class="c1"># --- PATH A: group label available at inference (legally permitted for remediation)</span>
+<span class="n">y_pred_path_a</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span>
+    <span class="n">X_test</span><span class="p">,</span>
+    <span class="n">sensitive_features</span><span class="o">=</span><span class="n">df_test</span><span class="p">[</span><span class="s2">&quot;status_and_sex&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+
+
+<span class="c1"># --- PATH B: group label unavailable at inference (group-blind deployment) </span>
+<span class="n">group_thresholds</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">g</span><span class="p">:</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">interpolated_thresholder_</span><span class="o">.</span><span class="n">interpolated_thresholder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">df_train</span><span class="p">[</span><span class="s2">&quot;status_and_sex&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="n">group_weights</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s2">&quot;status_and_sex&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">merged_threshold</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
+    <span class="n">group_weights</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">*</span> <span class="n">group_thresholds</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">group_weights</span><span class="o">.</span><span class="n">index</span>
+<span class="p">)</span>
+
+<span class="n">raw_proba</span> <span class="o">=</span> <span class="n">best_model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">y_pred_path_b</span> <span class="o">=</span> <span class="p">(</span><span class="n">raw_proba</span> <span class="o">&gt;=</span> <span class="n">merged_threshold</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+
+<span class="c1"># --- Evaluation (same for both paths) ---</span>
+<span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">y_pred</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">&quot;Path A (group-aware)&quot;</span><span class="p">,</span> <span class="n">y_pred_path_a</span><span class="p">),</span>
+                       <span class="p">(</span><span class="s2">&quot;Path B (group-blind)&quot;</span><span class="p">,</span>  <span class="n">y_pred_path_b</span><span class="p">)]:</span>
+    <span class="n">mf</span> <span class="o">=</span> <span class="n">MetricFrame</span><span class="p">(</span>
+        <span class="n">metrics</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;accuracy&quot;</span><span class="p">:</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="s2">&quot;tpr&quot;</span><span class="p">:</span> <span class="n">true_positive_rate</span><span class="p">},</span>
+        <span class="n">y_true</span><span class="o">=</span><span class="n">y_test</span><span class="p">,</span>
+        <span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred</span><span class="p">,</span>
+        <span class="n">sensitive_features</span><span class="o">=</span><span class="n">df_test</span><span class="p">[</span><span class="s2">&quot;status_and_sex&quot;</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">mf</span><span class="o">.</span><span class="n">by_group</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Equal opportunity gap:&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">mf</span><span class="o">.</span><span class="n">difference</span><span class="p">()[</span><span class="s2">&quot;tpr&quot;</span><span class="p">],</span> <span class="mi">4</span><span class="p">))</span>
+</code></pre></div>
+<h3 id="44-step-3-evaluation">4.4 Step 3: Evaluation</h3>
+<p><strong>Acceptance thresholds (set before post-processing):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Threshold</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Equal opportunity gap (gender)</td>
+<td>≤ 0.02</td>
+<td>Residual gap after in-processing; tighter than in-processing target given simpler intervention</td>
+</tr>
+<tr>
+<td>Intersectional max gap</td>
+<td>≤ 0.03</td>
+<td>Small subgroups carry higher variance; slightly relaxed but still ECOA-compliant</td>
+</tr>
+<tr>
+<td>Overall approval rate</td>
+<td>Within ±1% of 65%</td>
+<td>Business constraint: calibration must not materially shift portfolio volume</td>
+</tr>
+<tr>
+<td>AUC change</td>
+<td>≤ 0.01</td>
+<td>Post-processing should not degrade predictive ranking</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Results:</strong></p>
+<ul>
+<li>Equal opportunity gap (gender): 6% → 0.9% ✓</li>
+<li>Equal opportunity gap (age): 3% → 2.8% — post-processing targeted gender parity only; age gap held stable from in-processing but was not further reduced. Within threshold ✓</li>
+<li>Intersectional gaps: women &gt;60 from 0.12 → 0.02 ✓, foreign women 0.10 → 0.01 ✓</li>
+<li>Overall approval rate: 65% maintained ✓, AUC change &lt; 0.01 ✓</li>
+<li>Compatible with 3rd-party APIs: calibration and threshold logic applied externally to API outputs</li>
+</ul>
+<blockquote>
+<p>Age gap did not worsen under post-processing because <code>ThresholdOptimizer</code> was fitted on gender (<code>status_and_sex</code>) only. Age parity was not explicitly constrained here — it is carried over from in-processing. If age gap were to breach its threshold in production, re-run in-processing with a multi-attribute constraint covering both <code>status_and_sex</code> and <code>age_bucket</code>.</p>
+</blockquote>
+<hr />
+<h2 id="5-cross-stage-metrics-summary">5. Cross-Stage Metrics Summary</h2>
+<p>How key metrics evolved across each intervention stage. Use this as the baseline for monitoring in production.</p>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>AUC</th>
+<th>Equal Opp. Gap (Gender)</th>
+<th>Equal Opp. Gap (Age)</th>
+<th>Intersectional Max Gap</th>
+<th>Overall Approval Rate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Baseline (no intervention)</strong></td>
+<td>0.82</td>
+<td>0.08</td>
+<td>0.06</td>
+<td>0.12 (women &gt;60)</td>
+<td>65%</td>
+</tr>
+<tr>
+<td><strong>Post Pre-Processing</strong></td>
+<td>0.81</td>
+<td>0.05</td>
+<td>0.04</td>
+<td>0.08</td>
+<td>~65%</td>
+</tr>
+<tr>
+<td><strong>Post In-Processing</strong></td>
+<td>0.81</td>
+<td>0.02</td>
+<td>0.03</td>
+<td>~0.05</td>
+<td>~65%</td>
+</tr>
+<tr>
+<td><strong>Post Post-Processing</strong></td>
+<td>~0.81</td>
+<td>0.009</td>
+<td>0.028</td>
+<td>0.02</td>
+<td>65%</td>
+</tr>
+<tr>
+<td><strong>Target threshold</strong></td>
+<td>≥ 0.80</td>
+<td>≤ 0.02</td>
+<td>≤ 0.03</td>
+<td>≤ 0.03</td>
+<td>64–66%</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="6-key-takeaways">6. Key Takeaways</h2>
+<ol>
+<li>Causal analysis identifies bias pathways for protected and intersectional groups  </li>
+<li>Pre-processing mitigates input and proxy bias for internal models and APIs  </li>
+<li>In-processing embeds fairness in model training, especially for tree-based models  </li>
+<li>Post-processing addresses residual bias, ensures regulatory compliance, and supports external APIs  </li>
+<li>Intersectional fairness should be evaluated across all stages  </li>
+<li>Monitoring, evaluation, and periodic adjustment are essential for sustained fairness</li>
+</ol>
+<hr />
+<h2 id="7-end-to-end-workflow-summary">7. End-to-End Workflow Summary</h2>
+<ol>
+<li>Conduct causal analysis to identify mediators, proxies, and intersectional bias  </li>
+<li>Apply pre-processing to correct biased inputs and support small subgroups  </li>
+<li>Embed fairness in training using in-processing methods when retraining is possible  </li>
+<li>Apply post-processing to adjust outputs, calibrate probabilities, and maintain fairness across groups  </li>
+<li>Validate using fairness metrics, performance metrics, and subgroup analyses  </li>
+<li>Deploy monitoring for drift and emerging bias, adjust interventions as needed</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2026 Tatsiana Donkhina &nbsp;·&nbsp; Code <a href="LICENSE">MIT</a> &nbsp;·&nbsp; Docs <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>
+
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="/CONTRIBUTING/" target="_blank" rel="noopener" title="Contributing" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://linkedin.com/in/tatsianamark/" target="_blank" rel="noopener" title="LinkedIn" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "content.code.copy", "content.action.edit"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
