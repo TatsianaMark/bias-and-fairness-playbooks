@@ -1,12 +1,12 @@
-# Causal Analysis
+# Causal Fairness Analysis
 
 ## Overview
 
-The Causal Analysis toolkit maps the relationships between variables in an AI system to identify where bias originates and where interventions will be most effective. Unlike statistical correlation analysis, causal analysis distinguishes between protected attributes, mediators, proxies, and legitimate predictors — enabling teams to target the root cause of unfairness rather than treating symptoms.
+The Causal Analysis  maps the relationships between variables in an AI system to identify where bias originates and where interventions will be most effective. Unlike statistical correlation analysis, causal analysis distinguishes between protected attributes, mediators, proxies, and legitimate predictors — enabling teams to target the root cause of unfairness rather than treating symptoms.
 
-Use this toolkit before selecting pre-processing, in-processing, or post-processing interventions. Causal findings directly determine which toolkit to apply and at which pipeline stage.
+Use this guide before selecting pre-processing, in-processing, or post-processing interventions. Causal findings directly determine which approach to apply and at which pipeline stage.
 
-The toolkit covers both internal models (where causal graphs can be constructed from training data) and 3rd-party APIs (where the model is a black box and interventions must occur at the input and output boundaries).
+This guide covers both internal models (where causal graphs can be constructed from training data) and 3rd-party APIs (where the model is a black box and interventions must occur at the input and output boundaries).
 
 ## 1. Causal Modeling Template
 
@@ -271,5 +271,5 @@ Observed disparities appear directly in model predictions or decisions, regardle
 ## See Also
 
 - [Pre-Processing Methods](./pre_processing.md) — apply findings from causal analysis to data-level interventions
-- [Fairness Action Playbook — Overview](./fairness_action_playbook_intro.md) — decision checklist mapping bias type to toolkit
-- [Loan Approval Case Study — Causal Analysis](../../case_studies/loan_approval_fairness_e2e_case.md#1-causal-fairness-toolkit) — worked example with `dowhy` causal graph for the German Credit dataset
+- [Fairness Action Playbook — Overview](./fairness_action_playbook_intro.md) — decision checklist mapping bias type to intervention
+- [Loan Approval Case Study — Causal Analysis](../../case_studies/loan_approval_fairness_e2e_case.md#1-causal-fairness-analysis) — worked example with `dowhy` causal graph for the German Credit dataset

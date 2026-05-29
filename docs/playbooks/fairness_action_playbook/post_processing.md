@@ -290,6 +290,6 @@ y_pred = (y_proba_calibrated >= 0.15).astype(int)
 
 - [In-Processing Toolkit](./in_processing.md) — prior stage; reduces bias that post-processing then needs to correct
 - [Validation Framework](./validation_framework.md) — how to validate post-processing outcomes (Section 2.4) and set up production monitoring (Section 5)
-- [Loan Approval Case Study — Post-Processing](../../case_studies/loan_approval_fairness_e2e_case.md#4-post-processing) — worked example with Platt scaling, group calibration, and the protected-attribute-at-inference clarification
+- [Loan Approval Case Study — Post-Processing](../../case_studies/loan_approval_fairness_e2e_case.md#4-post-processing-outcomes) — worked example with Platt scaling, group calibration, and the protected-attribute-at-inference clarification
 
 ---

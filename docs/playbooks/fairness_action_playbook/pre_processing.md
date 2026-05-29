@@ -241,7 +241,7 @@ Guides pre-processing technique selection based on causal bias analysis. Steps a
 
 ## See Also
 
-- [Causal Analysis](./causal_fairness_toolkit.md) — identify which features to transform before applying pre-processing
+- [Causal Analysis](./causal_fairness_analysis.md) — identify which features to transform before applying pre-processing
 - [In-Processing Methods](./in_processing.md) — next stage after pre-processing
 - [Validation Framework](./validation_framework.md) — how to validate pre-processing outcomes (Section 2.2)
-- [Loan Approval Case Study — Pre-Processing](../../case_studies/loan_approval_fairness_e2e_case.md#2-pre-processing) — worked example with code on the German Credit dataset
+- [Loan Approval Case Study — Pre-Processing](../../case_studies/loan_approval_fairness_e2e_case.md#2-pre-processing-data) — worked example with code on the German Credit dataset

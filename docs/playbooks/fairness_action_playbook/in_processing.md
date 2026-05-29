@@ -340,4 +340,4 @@ In-training interventions are not available for 3rd-party APIs. Fairness must re
 * [Pre-Processing Methods](./pre_processing.md) — prior stage; apply before in-processing
 * [Post-Processing Methods](./post_processing.md) — next stage; handles residual bias after training
 * [Validation Framework](./validation_framework.md) — how to validate in-processing outcomes (Section 2.3)
-* [Loan Approval Case Study — In-Processing](../../case_studies/loan_approval_fairness_e2e_case.md#3-in-processing-toolkit) — worked example with `fairlearn.reductions.GridSearch` on gradient boosting
+* [Loan Approval Case Study — In-Processing](../../case_studies/loan_approval_fairness_e2e_case.md#3-in-processing-model) — worked example with `fairlearn.reductions.GridSearch` on gradient boosting

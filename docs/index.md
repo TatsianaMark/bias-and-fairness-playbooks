@@ -19,7 +19,8 @@ and HIPAA are referenced throughout.
 
 ---
 
-![Why This Matters](../../images/why_this_matters.svg)
+
+![Why This Matters](images/why_this_matters.svg)
 
 ---
 

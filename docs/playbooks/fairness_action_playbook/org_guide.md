@@ -25,10 +25,10 @@ The following factors influence the time required for each component.
 
 | Component | Key Complexity Factors |
 |-----------|----------------------|
-| Causal Fairness Toolkit | Dataset size, number of protected attributes, availability of domain experts to validate causal assumptions |
-| Pre-Processing Toolkit | Number of proxy and mediator variables, size of intersectional subgroups, access to synthetic data generation tools |
-| In-Processing Toolkit | Whether model retraining is possible, number of fairness constraints, hyperparameter tuning complexity |
-| Post-Processing Toolkit | Number of subgroups requiring calibration, regulatory requirements for threshold documentation |
+| Causal Fairness Analyses | Dataset size, number of protected attributes, availability of domain experts to validate causal assumptions |
+| Pre-Processing (Data) | Number of proxy and mediator variables, size of intersectional subgroups, access to synthetic data generation tools |
+| In-Processing (Model) | Whether model retraining is possible, number of fairness constraints, hyperparameter tuning complexity |
+| Post-Processing (Outcomes) | Number of subgroups requiring calibration, regulatory requirements for threshold documentation |
 | Full Pipeline Integration | Sequential dependency between components, intersectional fairness validation across all stages |
 
 > Note: Effort depends on team experience, dataset complexity, regulatory context,
@@ -41,10 +41,10 @@ The following factors influence the time required for each component.
 
 | Component | Skills Needed | Key Libraries |
 |-----------|---------------|---------------|
-| Causal Fairness Toolkit | Causal inference, DAG construction, domain knowledge to validate causal assumptions | `dowhy`, `networkx`, `causalml` |
-| Pre-Processing Toolkit | Data transformation, statistical bias mitigation, synthetic data generation | `aif360` (`Reweighing`, `DisparateImpactRemover`, `LFR`), `imbalanced-learn`, `sdv` |
-| In-Processing Toolkit | Model training, constrained optimisation, adversarial training, hyperparameter tuning | `fairlearn` (`ExponentiatedGradient`, `GridSearch`), `aif360` (`PrejudiceRemover`), `PyTorch` for adversarial debiasing |
-| Post-Processing Toolkit | Probability calibration, threshold optimisation, production monitoring | `fairlearn` (`ThresholdOptimizer`), `sklearn.calibration`, `aif360` (`CalibratedEqOddsPostprocessing`) |
+| Causal Fairness Analysis | Causal inference, DAG construction, domain knowledge to validate causal assumptions | `dowhy`, `networkx`, `causalml` |
+| Pre-Processing (Data) | Data transformation, statistical bias mitigation, synthetic data generation | `aif360` (`Reweighing`, `DisparateImpactRemover`, `LFR`), `imbalanced-learn`, `sdv` |
+| In-Processing (Model) | Model training, constrained optimisation, adversarial training, hyperparameter tuning | `fairlearn` (`ExponentiatedGradient`, `GridSearch`), `aif360` (`PrejudiceRemover`), `PyTorch` for adversarial debiasing |
+| Post-Processing (Outcomes) | Probability calibration, threshold optimisation, production monitoring | `fairlearn` (`ThresholdOptimizer`), `sklearn.calibration`, `aif360` (`CalibratedEqOddsPostprocessing`) |
 | Validation & Monitoring | Subgroup metric evaluation, drift detection, alerting pipelines | `fairlearn.metrics.MetricFrame`, `evidently`, `alibi-detect` |
 | Cross-Cutting | Regulatory knowledge (ECOA, GDPR, EU AI Act), intersectional fairness, documentation for audit | — |
 

@@ -66,7 +66,7 @@ nav:
   - Action :
     - Fairness Action Playbook:
         - Overview and Guidance: playbooks/fairness_action_playbook/fairness_action_playbook_intro.md
-        - Causal Analysis: playbooks/fairness_action_playbook/causal_fairness_toolkit.md
+        - Causal Analysis: playbooks/fairness_action_playbook/causal_fairness_analysis.md
         - Pre-Processing (Data): playbooks/fairness_action_playbook/pre_processing.md
         - In-Processing (Model): playbooks/fairness_action_playbook/in_processing.md
         - Post-Processing (Outcomes): playbooks/fairness_action_playbook/post_processing.md

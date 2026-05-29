@@ -1,6 +1,6 @@
 # Fairness Action Playbook: End-to-End Case Study
 
-This document integrates the Causal Fairness Toolkit, Pre-Processing, In-Processing, and Post-Processing Fairness Toolkits into a single workflow using a loan approval dataset as an example. It demonstrates how to address bias across protected and intersectional groups for both internal models and 3rd-party AI APIs.
+This document integrates the Causal Fairness Analysis, Pre-Processing, In-Processing, and Post-Processing Fairness Guides into a single workflow using a loan approval dataset as an example. It demonstrates how to address bias across protected and intersectional groups for both internal models and 3rd-party AI APIs.
 
 ---
 
@@ -35,7 +35,7 @@ This system is a **credit / loan approval** model. The following regulatory obli
 
 ---
 
-## 1. Causal Fairness Toolkit
+## 1. Causal Fairness Analysis
 
 **Dataset Columns**:
 
@@ -109,7 +109,7 @@ Include intersectional columns in causal graphs to capture compounded bias.
 
 The causal graph represents relationships between protected attributes, mediators, proxies, and the final outcome, showing potential bias pathways.
 
-![Causal Graph Example](../../images/causal_graph_cs.png)
+![Causal Graph Example](../images/causal_graph_cs.png)
 
 The graph below encodes the same structure programmatically for reproducibility and auditability:
 
@@ -177,7 +177,7 @@ model.view_model()
 
 ---
 
-## 2. Pre-Processing Toolkit
+## 2. Pre-Processing (Data)
 
 This step demonstrates bias mitigation in input data for internal models and 3rd-party APIs.
 
@@ -323,7 +323,7 @@ Pre-processing reduced the gender equal opportunity gap from 0.08 to 0.05 and cu
 
 ---
 
-## 3. In-Processing Toolkit
+## 3. In-Processing (Model)
 
 ### 3.1 System Context
 
@@ -405,7 +405,7 @@ print("Equal opportunity gap:", mf.difference()["tpr"])
 
 ---
 
-## 4. Post-Processing Toolkit
+## 4. Post-Processing (Outcomes)
 
 ### 4.1 System Context
 
