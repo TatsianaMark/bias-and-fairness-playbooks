@@ -3,12 +3,35 @@
 ![License](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey)
 ![MkDocs](https://img.shields.io/badge/Built%20with-MkDocs-blue)
 ![Status](https://img.shields.io/badge/Status-Active-green)
+![GitHub stars](https://img.shields.io/github/stars/TatsianaMark/bias-and-fairness-playbooks)
+![GitHub forks](https://img.shields.io/github/forks/TatsianaMark/bias-and-fairness-playbooks)
+
+- [Bias & Fairness Playbooks](https://tatsianamark.github.io/bias-and-fairness-playbooks)
+
+
+---
+AI fairness work is often theoretical. These playbooks 
+translate fairness theory and regulatory requirements 
+into practical guidance — giving teams a structured 
+process for detecting and mitigating bias in classical 
+ML systems, from data preparation through deployment.
+
+Built for engineering and data science teams working 
+in healthcare, fintech, and other regulated industries.
 
 ---
 
-These playbooks provide engineering and data science teams with practical, actionable workflows to identify, measure, and mitigate unfairness in AI systems — from initial assessment through deployment and ongoing monitoring.
+## Who Is This For
 
----
+Primarily for teams who need to implement a fairness audit 
+on their own systems:
+
+- Engineering and data science teams building or maintaining AI systems
+- Product managers and heads of product in regulated industries
+- Compliance officers navigating EU AI Act requirements
+- QA and assurance practitioners moving into AI systems
+- Founders of AI startups in healthcare, fintech, or public sector
+- Teams doing their first fairness audit with no prior framework
 
 ## Overview
 
@@ -16,8 +39,8 @@ AI fairness work is often fragmented: audits happen without follow-through, and 
 
 | Playbook | Purpose |
 |---|---|
-| **Fairness Assessment Playbook** | Detect and diagnose bias — understand what is wrong and why |
-| **Fairness Action Playbook** | Apply targeted interventions — correct bias at the data, model, or output stage |
+| Fairness Assessment Playbook | Detect and diagnose bias: understand what is wrong and why |
+| Fairness Action Playbook | Apply targeted interventions: correct bias at the data, model, or output stage |
 
 Both playbooks are designed to be modular: teams can apply them to a specific component, use case, or development phase rather than implementing everything at once.
 
@@ -31,10 +54,10 @@ Standardized guidance for evaluating bias and fairness across an AI system's ful
 
 | Component | What it covers |
 |---|---|
-| **Context & History Analysis** | Examines historical, social, and organizational factors that shaped the system's data and design |
-| **Fairness Definition Guide** | Helps teams select and apply the right fairness definitions given stakeholder priorities and error-impact trade-offs |
-| **Bias Root Cause Analysis** | Categorizes bias sources, applies structured detection methods, and prioritizes interventions |
-| **Fairness Metrics** | Guides metric selection, statistical validation, and visualization across demographic and intersectional groups |
+| Context & History Analysis | Examines historical, social, and organizational factors that shaped the system's data and design |
+| Fairness Definition Guide | Helps teams select and apply the right fairness definitions given stakeholder priorities and error-impact trade-offs |
+| Bias Root Cause Analysis | Categorizes bias sources, applies structured detection methods, and prioritizes interventions |
+| Fairness Metrics | Guides metric selection, statistical validation, and visualization across demographic and intersectional groups |
 
 ---
 
@@ -44,12 +67,12 @@ A structured framework for implementing fairness interventions consistently and 
 
 | Component | What it covers |
 |---|---|
-| **Causal Analysis** | Maps how protected attributes influence downstream outcomes |
-| **Pre-Processing** | Corrects biased data representations before model training |
-| **In-Processing** | Embeds fairness constraints directly into model training |
-| **Post-Processing** | Adjusts predictions or thresholds to reduce unfair outcomes after training |
-| **Validation Framework** | Validates interventions across fairness, accuracy, and business metrics |
-| **Implementation Guide** | Organizational integration and team workflow guidance |
+| Causal Analysis | Maps how protected attributes influence downstream outcomes |
+| Pre-Processing | Corrects biased data representations before model training |
+| In-Processing | Embeds fairness constraints directly into model training |
+| Post-Processing | Adjusts predictions or thresholds to reduce unfair outcomes after training |
+| Validation Framework | Validates interventions across fairness, accuracy, and business metrics |
+| Implementation Guide | Organizational integration and team workflow guidance |
 
 ---
 
@@ -57,8 +80,8 @@ A structured framework for implementing fairness interventions consistently and 
 
 Two end-to-end examples demonstrating the playbooks applied to real-world scenarios:
 
-- **Medical Health AI Agent** — Applying the Assessment Playbook to a clinical decision-support system serving a diverse patient population, with attention to historical healthcare discrimination patterns.
-- **Loan Approval (End-to-End)** — Applying the full Action Playbook to a credit scoring model, covering ECOA, Fair Housing Act, and GDPR compliance requirements.
+- Medical Health AI Agent — Applying the Assessment Playbook to a clinical decision-support system serving a diverse patient population, with attention to historical healthcare discrimination patterns.
+- Loan Approval (End-to-End) — Applying the full Action Playbook to a credit scoring model, covering ECOA, Fair Housing Act, and GDPR compliance requirements.
 
 ---
 
@@ -129,7 +152,15 @@ The Action Playbook is currently optimized for classical ML systems — classifi
 ## Contributing
 
 Contributions, corrections, and suggestions are welcome.  
-[![Contributing](https://img.shields.io/badge/GitHub-Contributing-181717?logo=github)](https://github.com/TuringCollegeSubmissions/tdonkh-AIET.3.5.1/blob/main/CONTRIBUTING.md)
+[![Contributing](https://img.shields.io/badge/GitHub-Contributing-181717?logo=github)](https://github.com/TatsianaMark/bias-and-fairness-playbooks/blob/main/CONTRIBUTING.md)
+
+
+## Author
+
+Built by Tatsiana Donkhina: AI Fairness, Assurance & LLM Testing · Advancing Responsible AI · Certified in AI Ethics
+
+- [LinkedIn](https://www.linkedin.com/in/tatsianamark/)
+- [GitHub](https://github.com/TatsianaMark)
 
 ## License
 
