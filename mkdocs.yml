@@ -1,4 +1,5 @@
 site_name: Bias & Fairness Playbooks
+site_url: https://tatsianamark.github.io/bias-and-fairness-playbooks
 
 theme:
   name: material
