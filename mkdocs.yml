@@ -46,13 +46,12 @@ extra:
     - icon: fontawesome/brands/linkedin
       link: https://linkedin.com/in/tatsianamark/
       name: LinkedIn
-      
-extra_headers:
-  - <meta name="google-site-verification" content="0eL6SL228A5hzsEN3IMjv4paBAsvt1Y6XyXiKMuotYo" />
 
 extra_css:
   - stylesheets/extra.css
 
+exclude_docs: |
+  google*.html
 
 nav:
   - Home: index.md
